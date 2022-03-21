@@ -1,6 +1,5 @@
 package com.online_dtie_tracker.model;
 
-import com.online_dtie_tracker.enums.ToDoStatus;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,22 +10,22 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "tbl_toDo")
-public class ToDo {
+@Table(name = "tbl_income")
+public class Income {
     @Id
-    @GeneratedValue(generator = "toDo_sequence",strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name ="toDO_sequence",sequenceName = "toDo_sequence",
+    @GeneratedValue(generator = "income_sequence",strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name ="income_sequence",sequenceName = "income_sequence",
             allocationSize = 15)
     private Integer id;
 
     @Column(nullable = false)
-    private String title;
+    private String source;
 
     @Column(nullable = false)
-    private ToDoStatus toDoStatus;
+    private Double amount;
 
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_user_todo"))
+            foreignKey = @ForeignKey(name = "fk_user_income"))
     private User user;
 }
