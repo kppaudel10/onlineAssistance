@@ -16,4 +16,5 @@ public class ExpensesDto {
     private Double expensesAmount;
     private Date paidDate;
     private List<IncomeDto> incomeDtoList;
+
 }
