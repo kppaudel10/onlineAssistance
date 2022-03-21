@@ -1,5 +1,6 @@
 package com.online_dtie_tracker.Dto;
 
+import com.online_dtie_tracker.model.Income;
 import lombok.*;
 
 import java.util.Date;
@@ -15,6 +16,6 @@ public class ExpensesDto {
     private String expensesSource;
     private Double expensesAmount;
     private Date paidDate;
-    private List<IncomeDto> incomeDtoList;
+    private List<Income> incomeList;
 
 }

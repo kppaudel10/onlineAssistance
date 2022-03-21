@@ -1,5 +1,6 @@
 package com.online_dtie_tracker.Dto;
 
+import com.online_dtie_tracker.model.Expenses;
 import com.online_dtie_tracker.model.User;
 import lombok.*;
 
@@ -17,5 +18,5 @@ public class IncomeDto {
     private Double amount;
     private Date incomeDate;
     private User user;
-    private List<ExpensesDto> expensesDtoList;
+    private List<Expenses> expensesDtoList;
 }
