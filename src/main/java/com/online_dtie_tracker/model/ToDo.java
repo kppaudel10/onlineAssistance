@@ -15,8 +15,7 @@ import javax.persistence.*;
 public class ToDo {
     @Id
     @GeneratedValue(generator = "toDo_sequence",strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name ="toDO_sequence",sequenceName = "toDo_sequence",
-            allocationSize = 15)
+    @SequenceGenerator(name ="toDO_sequence",sequenceName = "toDo_sequence",allocationSize = 15)
     private Integer id;
 
     @Column(nullable = false)

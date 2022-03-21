@@ -3,6 +3,7 @@ package com.online_dtie_tracker.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,4 +29,7 @@ public class Income {
     @JoinColumn(name = "user_id",referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_user_income"))
     private User user;
+
+    @ManyToMany(mappedBy = "incomeList")
+    private List<Expenses> expensesList;
 }
