@@ -4,6 +4,7 @@ import com.online_dtie_tracker.enums.ToDoStatus;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -23,6 +24,10 @@ public class ToDo {
 
     @Column(nullable = false)
     private ToDoStatus toDoStatus;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date toDoDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id",

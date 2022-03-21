@@ -24,6 +24,9 @@ public class Expenses {
     private String expenses_source;
 
     @Column(nullable = false)
+    private Double expensesAmount;
+
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date paidDate;
 
