@@ -3,6 +3,7 @@ package com.online_dtie_tracker.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -24,6 +25,10 @@ public class Income {
 
     @Column(nullable = false)
     private Double amount;
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date incomeDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id",
