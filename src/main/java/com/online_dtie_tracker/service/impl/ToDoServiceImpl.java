@@ -1,6 +1,7 @@
 package com.online_dtie_tracker.service.impl;
 
 import com.online_dtie_tracker.Dto.ToDoDto;
+import com.online_dtie_tracker.authorizeduser.AuthorizedUser;
 import com.online_dtie_tracker.conversion.DtoModelConvert;
 import com.online_dtie_tracker.model.ToDo;
 import com.online_dtie_tracker.repo.todo.ToDoRepo;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,4 +70,16 @@ public class ToDoServiceImpl implements ToDoService {
     public void update(ToDoDto toDoDto) throws IOException, ParseException {
 
     }
+
+    //this method return all today task
+    public List<ToDo> findAllTodayTask(){
+        return toDoRepo.getTaskByDate(LocalDate.now(), AuthorizedUser.getUser().getId());
+    }
+
+    //find yesterday task
+
+    public List<ToDo> findAllYesterdayTask(){
+        return toDoRepo.getTaskByDate(LocalDate.ofEpochDay(2022-03-22),AuthorizedUser.getUser().getId());
+    }
+
 }

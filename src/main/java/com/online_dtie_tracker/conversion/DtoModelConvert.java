@@ -4,10 +4,13 @@ import com.online_dtie_tracker.Dto.ExpensesDto;
 import com.online_dtie_tracker.Dto.IncomeDto;
 import com.online_dtie_tracker.Dto.ToDoDto;
 import com.online_dtie_tracker.Dto.UserDto;
+import com.online_dtie_tracker.authorizeduser.AuthorizedUser;
 import com.online_dtie_tracker.model.Expenses;
 import com.online_dtie_tracker.model.Income;
 import com.online_dtie_tracker.model.ToDo;
 import com.online_dtie_tracker.model.User;
+
+import java.util.Date;
 
 public class DtoModelConvert {
     /**
@@ -64,6 +67,8 @@ public class DtoModelConvert {
                 .id(toDoDto.getId())
                 .title(toDoDto.getTitle())
                 .toDoStatus(toDoDto.getToDoStatus())
-                .toDoDate(toDoDto.getToDoDate()).build();
+                .toDoDate(new Date())
+                .user(AuthorizedUser.getUser()).build();
     }
+
 }

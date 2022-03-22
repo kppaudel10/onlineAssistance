@@ -1,6 +1,7 @@
 package com.online_dtie_tracker.controller.login;
 
 import com.online_dtie_tracker.Dto.LoginDto;
+import com.online_dtie_tracker.authorizeduser.AuthorizedUser;
 import com.online_dtie_tracker.model.User;
 import com.online_dtie_tracker.service.impl.LoginServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,10 @@ public class LoginController {
     public LoginController(LoginServiceImpl loginService) {
         this.loginService = loginService;
     }
-
+    
+    //store Authorized user
+    private static User authorizedUser;
+    
     @GetMapping("/home")
     public String getLoginPage(Model model){
         model.addAttribute("loginDto",new LoginDto());
@@ -38,6 +42,9 @@ public class LoginController {
          User user = loginService.isValidUser(loginDto.getUserName(),loginDto.getPassword());
             if (user.getId() !=null){
                 //go for that valid user home page
+                //set as authorized user
+                AuthorizedUser.setUser(user);
+
                 model.addAttribute("authorizedUser",user);
                 return "userhomepage/userhomepage";
             }else {

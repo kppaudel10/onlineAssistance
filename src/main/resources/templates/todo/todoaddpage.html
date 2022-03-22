@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/todoFormCss.css}" rel="stylesheet"/>
+    <link th:href="@{/css/displayError.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragment/fragment :: js_link" ></div>
+    <div th:replace="fragment/fragment :: css_link" ></div>
+    <div th:replace="fragment/fragment :: ganeric_css" ></div>
+    <div th:replace="fragment/fragment :: navbar " ></div>
+    <div th:replace="fragment/fragment :: homecss " ></div>
+    <div class="main">
+        <div class="wrapper">
+
+            <div class="registration_form">
+                <!-- Title -->
+                <div class="title">
+                    Today Task
+                </div>
+
+                <!-- Form -->
+                <form th:action="@{/todo/add}" th:method="post" th:object="${toDoDto}">
+                    <div class="form_wrap">
+                        <input type="hidden" th:field="*{id}">
+                        <!-- task title-->
+                        <div class="input_wrap">
+                            <label for="title">Task Title</label>
+                            <input type="text" id="title" placeholder="enter task title" th:field="*{title}">
+                            <p class="display_msg" th:if="${#fields.hasErrors('title')}"
+                               th:errors="*{title}"></p>
+                        </div>
+
+                        <!-- status Select box -->
+                        <div class="input_wrap">
+                            <label>Status</label>
+                            <ul>
+                                <li>
+                                    <label class="radio_wrap">
+                                        <input type="radio" name="status" value="PENDING" class="input_radio"
+                                               checked th:field="*{toDoStatus}">
+                                        <span>PENDING</span>
+                                    </label>
+                                </li>
+
+                                <li>
+                                    <label class="radio_wrap">
+                                        <input type="radio" name="status" value="DONE" class="input_radio"
+                                               th:field="*{toDoStatus}">
+                                        <span>Done</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="input_wrap">
+                            <input type="submit" value="Submit" class="submit_btn">
+                        </div>
+
+                    </div>
+                </form>
+                <h4 style="color: green" th:text="*{message}"></h4>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
