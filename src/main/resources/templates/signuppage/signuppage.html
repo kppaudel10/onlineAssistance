@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/css/displayError.css}" rel="stylesheet"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
         *{
@@ -166,31 +167,49 @@
 <div class="container">
     <div class="title">Sign Up</div>
     <div class="content">
-        <form action="#">
+        <form th:action="@{~/signup/add}" th:method="post" th:object="${userDto}">
             <div class="user-details">
                 <div class="input-box">
                     <span class="details">Full Name</span>
-                    <input type="text" placeholder="Enter your name" required>
+                    <input type="text" placeholder="Enter your name" th:field="*{name}">
+                    <p class="display_msg" th:if="${#fields.hasErrors('name')}"
+                       th:errors="*{name}"></p>
                 </div>
+
                 <div class="input-box">
-                    <span class="details">Username</span>
-                    <input type="text" placeholder="Enter your username" required>
+                    <span class="details">Address</span>
+                    <input type="text" placeholder="Enter your address" th:field="*{address}">
+                    <p class="display_msg" th:if="${#fields.hasErrors('address')}"
+                       th:errors="*{address}"></p>
                 </div>
+
                 <div class="input-box">
                     <span class="details">Email</span>
-                    <input type="text" placeholder="Enter your email" required>
+                    <input type="text" placeholder="Enter your email"th:field="*{email}">
+                    <p class="display_msg" th:if="${#fields.hasErrors('email')}"
+                       th:errors="*{email}"></p>
                 </div>
+
                 <div class="input-box">
                     <span class="details">Phone Number</span>
-                    <input type="text" placeholder="Enter your number" required>
+                    <input type="text" placeholder="Enter your number" th:field="*{contact}">
+                    <p class="display_msg" th:if="${#fields.hasErrors('contact')}"
+                       th:errors="*{contact}"></p>
                 </div>
+
                 <div class="input-box">
                     <span class="details">Password</span>
-                    <input type="text" placeholder="Enter your password" required>
+                    <input type="password" placeholder="Enter your password" th:field="*{password}">
+                    <p class="display_msg" th:if="${#fields.hasErrors('password')}"
+                       th:errors="*{password}"></p>
                 </div>
+
                 <div class="input-box">
                     <span class="details">Confirm Password</span>
-                    <input type="text" placeholder="Confirm your password" required>
+                    <input type="password" placeholder="Confirm your password"
+                           th:field="*{reTypePassword}">
+                    <p class="display_msg" th:if="${#fields.hasErrors('reTypePassword')}"
+                       th:errors="*{reTypePassword}"></p>
                 </div>
             </div>
 <!--            <div class="gender-details">-->
@@ -220,6 +239,8 @@
 <!--                <input type="reset" value="Reset">-->
 <!--            </div>-->
         </form>
+        <h4 style="background-color: green" th:text="*{message}"></h4>
+        <p class="display_msg" th:text="*{passwordMsg}"></p>
     </div>
 </div>
 </body>
