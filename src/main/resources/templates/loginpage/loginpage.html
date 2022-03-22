@@ -1,242 +1,188 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login form</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
-          integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>lOGIN</title>
     <style>
-
-        * {
-            margin-top: 80px;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-        }
-        .bg-img {
-            background: url("https://images.pexels.com/photos/34088/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-            height: 100vh;
-            background-size: cover;
-            background-position: center;
-        }
-        .bg-img:after {
-            position: absolute;
-            content: "";
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.7);
-        }
-        .content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 999;
-            text-align: center;
-            padding: 60px 32px;
-            width: 370px;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.04);
-            box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
-        }
-        .content header {
-            color: white;
-            font-size: 33px;
-            font-weight: 600;
-            margin: 0 0 35px 0;
-            font-family: "Montserrat", sans-serif;
-        }
-        .field {
-            position: relative;
-            height: 45px;
-            width: 100%;
-            display: flex;
-            background: rgba(255, 255, 255, 0.94);
-            border-radius: 6px;
-
-        }
-        .field span {
-            color: #222;
-            width: 40px;
-            line-height: 45px;
-        }
-        .field input {
-            height: 100%;
-            width: 100%;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #222;
-            font-size: 16px;
-            font-family: "Poppins", sans-serif;
-        }
-        .space {
-            margin-top: 16px;
-        }
-        .show {
-            position: absolute;
-            right: 13px;
-            font-size: 13px;
-            font-weight: 700;
-            color: #222;
-            display: none;
-            cursor: pointer;
-            font-family: "Montserrat", sans-serif;
-        }
-        .pass-key:valid ~ .show {
-            display: block;
-        }
-        .pass {
-            text-align: left;
-            margin: 10px 0;
-        }
-        .pass a {
-            color: white;
-            text-decoration: none;
-            font-family: "Poppins", sans-serif;
-        }
-        .pass:hover a {
-            text-decoration: underline;
-        }
-        .field input[type="submit"] {
-            background: #3498db;
-            border: 1px solid #2691d9;
-            color: white;
-            font-size: 18px;
-            letter-spacing: 1px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: "Montserrat", sans-serif;
-        }
-        .field input[type="submit"]:hover {
-            background: #2691d9;
-        }
-        .login {
-            color: white;
-            margin: 20px 0;
-            font-family: "Poppins", sans-serif;
-            border-radius: 6px;
-
-        }
-        .links {
-            display: flex;
-            cursor: pointer;
-            color: white;
-            margin: 0 0 20px 0;
-            border-radius: 6px;
-
-        }
-        .facebook,
-        .instagram {
-            width: 100%;
-            height: 45px;
-            line-height: 45px;
-            margin-left: 10px;
-        }
-        .facebook {
-            margin-left: 0;
-            background: #4267b2;
-            border: 1px solid #3e61a8;
-            border-radius: 6px;
-        }
-        .instagram {
-            background: #e1306c;
-            border: 1px solid #df2060;
-            border-radius: 6px;
-        }
-        .facebook:hover {
-            background: #3e61a8;
-        }
-        .instagram:hover {
-            background: #df2060;
-        }
-        .links i {
-            font-size: 17px;
-        }
-        i span {
-            margin-left: 8px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            font-size: 16px;
-            font-family: "Poppins", sans-serif;
-        }
-        .signup {
-            font-size: 15px;
-            color: white;
-            font-family: "Poppins", sans-serif;
-        }
-        .signup a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        .signup a:hover {
-            text-decoration: underline;
-        }
-        .main{
-            margin-top: 180px;
-        }
-
-    </style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+    *{
+        /*margin: 0;*/
+        margin-top: 10px;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+    html,body{
+        display: flex;
+        height: 100%;
+        width: 100%;
+        place-items: center;
+        background: #ebf1f1;
+        position: absolute;
+        /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
+    }
+    ::selection{
+        background: #4158d0;
+        color: #fff;
+    }
+    .wrapper{
+        width: 380px;
+        margin-left: 45%;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+    }
+    .wrapper .title{
+        font-size: 35px;
+        font-weight: 600;
+        text-align: center;
+        line-height: 100px;
+        color: #fff;
+        user-select: none;
+        border-radius: 15px 15px 0 0;
+        background: linear-gradient(-135deg, #c850c0, #4158d0);
+    }
+    .wrapper form{
+        padding: 10px 30px 50px 30px;
+    }
+    .wrapper form .field{
+        height: 50px;
+        width: 100%;
+        margin-top: 20px;
+        position: relative;
+    }
+    .wrapper form .field input{
+        height: 100%;
+        width: 100%;
+        outline: none;
+        font-size: 17px;
+        padding-left: 20px;
+        border: 1px solid lightgrey;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+    }
+    .wrapper form .field input:focus,
+    form .field input:valid{
+        border-color: #4158d0;
+    }
+    .wrapper form .field label{
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        color: #999999;
+        font-weight: 400;
+        font-size: 17px;
+        pointer-events: none;
+        transform: translateY(-50%);
+        transition: all 0.3s ease;
+    }
+    form .field input:focus ~ label,
+    form .field input:valid ~ label{
+        top: 0%;
+        font-size: 16px;
+        color: #4158d0;
+        background: #fff;
+        transform: translateY(-50%);
+    }
+    form .content{
+        display: flex;
+        width: 100%;
+        height: 50px;
+        font-size: 16px;
+        align-items: center;
+        justify-content: space-around;
+    }
+    form .content .checkbox{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    form .content input{
+        width: 15px;
+        height: 15px;
+        background: red;
+    }
+    form .content label{
+        color: #262626;
+        user-select: none;
+        padding-left: 5px;
+    }
+    form .content .pass-link{
+        /*color: "";*/
+    }
+    form .field input[type="submit"]{
+        color: #fff;
+        border: none;
+        padding-left: 0;
+        margin-top: -10px;
+        font-size: 20px;
+        font-weight: 500;
+        cursor: pointer;
+        background: linear-gradient(-135deg, #c850c0, #4158d0);
+        transition: all 0.3s ease;
+    }
+    form .field input[type="submit"]:active{
+        transform: scale(0.95);
+    }
+    form .signup-link{
+        color: #262626;
+        margin-top: 20px;
+        text-align: center;
+    }
+    form .pass-link a,
+    form .signup-link a{
+        color: #4158d0;
+        text-decoration: none;
+    }
+    form .pass-link a:hover,
+    form .signup-link a:hover{
+        text-decoration: underline;
+    }
+    /*.main{*/
+    /*    margin-top: 50px;*/
+    /*    float: left;*/
+    /*}*/
+    .container{
+        margin-left: 0px;
+    }
+</style>
 </head>
 <body>
-    <div th:replace="fragment/loginfragment ::loginHome"></div>
-    <div th:replace="fragment/loginfragment ::loginHomeCss"></div>
-    <div th:replace="fragment/loginfragment ::loginHomeLink"></div>
-<div class="main">
-    <div class="bg-img">
-        <div class="content">
-            <header>Login Form</header>
+<!--<div class="container">-->
+    <div th:replace="fragment/loginfragment :: loginHome"></div>
+    <div th:replace="fragment/loginfragment :: loginHomeCss"></div>
+    <div th:replace="fragment/loginfragment :: loginHomeLink"></div>
+<!--    <div class="main">-->
+        <div class="wrapper">
+            <div class="title">
+                Login Here
+            </div>
             <form action="#">
                 <div class="field">
-                    <span class="fa fa-user"></span>
-                    <input type="text" required placeholder="Email or Phone">
-                </div>
-                <div class="field space">
-                    <span class="fa fa-lock"></span>
-                    <input type="password" class="pass-key" required placeholder="Password">
-                    <span class="show">SHOW</span>
-                </div>
-                <div class="pass">
-                    <a href="#">Forgot Password?</a>
+                    <input type="text" required>
+                    <label>Email Address</label>
                 </div>
                 <div class="field">
-                    <input type="submit" value="LOGIN">
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="content">
+                    <!--            <div class="checkbox">-->
+                    <!--                <input type="checkbox" id="remember-me">-->
+                    <!--                <label for="remember-me">Remember me</label>-->
+                    <!--            </div>-->
+                    <div class="pass-link">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                </div>
+                <div class="field">
+                    <input type="submit" value="Login">
+                </div>
+                <div class="signup-link">
+                    Not a member? <a href="#">Signup now</a>
                 </div>
             </form>
-            <div class="login">Or login with</div>
-            <div class="links">
-                <div class="facebook">
-                    <i class="fab fa-facebook-f"><span>Facebook</span></i>
-                </div>
-                <div class="instagram">
-                    <i class="fab fa-instagram"><span>Instagram</span></i>
-                </div>
-            </div>
-            <div class="signup">Don't have account?
-                <a href="#">Signup Now</a>
-            </div>
         </div>
-    </div>
-</div>
-<!--Script using-->
-<script type="text/javascript">
-    const pass_field = document.querySelector(".pass-key");
-    const showBtn = document.querySelector(".show");
-    showBtn.addEventListener("click", function() {
-        if (pass_field.type === "password") {
-            pass_field.type = "text";
-            showBtn.textContent = "HIDE";
-            showBtn.style.color = "#3498db";
-        } else {
-            pass_field.type = "password";
-            showBtn.textContent = "SHOW";
-            showBtn.style.color = "#222";
-        }
-    });
-
-</script>
+<!--    </div>-->
+<!--</div>-->
 </body>
 </html>

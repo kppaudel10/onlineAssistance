@@ -1,4 +1,4 @@
-<html lang="en"  xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,25 +37,27 @@
       padding: 0;
       font-family: Arial, Helvetica, sans-serif;
     }
-    body{
+    /*body{*/
 
-      /*background-image: url('doct1.jpg');*/
-      background-repeat: no-repeat;
-      background-size: cover;
-      /*background-position: relative;*/
-    }
+    /*  !*background-image: url('doct1.jpg');*!*/
+    /*  background-repeat: no-repeat;*/
+    /*  background-size: cover;*/
+    /*  !*background-position: relative;*!*/
+    /*}*/
 
     .topnav {
       overflow: hidden;
-      background-color: #e9e9e9;
-      position: -webkit-sticky; /* Safari */
-      position: sticky;
+      background-color: #44dcdc;
+      /*position: -webkit-sticky; !* Safari *!*/
+      /*position: sticky;*/
+      height: 55px;
+      width: 100%;
+      position: fixed;
       top: 0;
     }
 
     .topnav a {
       float: left;
-      display: block;
       color: black;
       text-align: center;
       padding: 14px 16px;
@@ -100,12 +102,12 @@
 
     @media screen and (max-width: 600px) {
       .topnav .login-container {
-        float: none;
+        float: left;
         text-align: center;
 
       }
       .topnav a, .topnav .login-container a {
-        float: none;
+        float: left;
         display: block;
         text-align: center;
         width: 100%;
@@ -114,7 +116,6 @@
       }
 
     }
-
   </style>
 </div>
 </body>
