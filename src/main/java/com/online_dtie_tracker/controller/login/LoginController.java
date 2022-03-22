@@ -38,6 +38,8 @@ public class LoginController {
          User user = loginService.isValidUser(loginDto.getUserName(),loginDto.getPassword());
             if (user.getId() !=null){
                 //go for that valid user home page
+                model.addAttribute("authorizedUser",user);
+                return "userhomepage/userhomepage";
             }else {
                 //back to login page
                 model.addAttribute("InvalidMessage","invalid username or password");
