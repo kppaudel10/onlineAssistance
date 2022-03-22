@@ -68,4 +68,8 @@ public class UserServiceImpl implements UserService {
     public void update(UserDto userDto) throws IOException, ParseException {
 
     }
+
+    public User getUserByUserName(String userName){
+       return userRepo.getUserByUserName(userName);
+    }
 }

@@ -21,6 +21,7 @@ public class DtoModelConvert {
                 .name(userDto.getName())
                 .address(userDto.getAddress())
                 .contact(userDto.getContact())
+                .password(userDto.getPassword())
                 .email(userDto.getEmail()).build();
     }
 

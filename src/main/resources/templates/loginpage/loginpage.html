@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>lOGIN || HOME </title>
-
+    <link th:href="@{/css/displayError.css}" rel="stylesheet"/>
     <style>
     @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
     *{
@@ -157,14 +157,20 @@
             <div class="title">
                 Login Here
             </div>
-            <form action="#">
+            <form th:action="@{/login/home}" th:method="post" th:object="${loginDto}">
                 <div class="field">
-                    <input type="text" required>
+                    <input type="text" th:field="*{userName}">
                     <label>Username</label>
+                    <p class="display_msg" th:if="${#fields.hasErrors('userName')}"
+                       th:errors="*{userName}"></p>
                 </div>
+                <br>
+
                 <div class="field">
-                    <input type="password" required>
+                    <input type="password" th:field="*{password}">
                     <label>Password</label>
+                    <p class="display_msg" th:if="${#fields.hasErrors('password')}"
+                       th:errors="*{password}"></p>
                 </div>
                 <div class="content">
                     <!--            <div class="checkbox">-->
@@ -182,6 +188,7 @@
                     Not a member? <a th:href="@{/signup/home}">Signup now</a>
                 </div>
             </form>
+            <p class="invalidUsernamePassword" th:text="*{InvalidMessage}"></p>
         </div>
 <!--    </div>-->
 <!--</div>-->
