@@ -2,15 +2,18 @@ package com.online_dtie_tracker.service.impl;
 
 import com.online_dtie_tracker.Dto.ToDoDto;
 import com.online_dtie_tracker.authorizeduser.AuthorizedUser;
+import com.online_dtie_tracker.authorizeduser.UserTask;
 import com.online_dtie_tracker.conversion.DtoModelConvert;
 import com.online_dtie_tracker.model.ToDo;
 import com.online_dtie_tracker.repo.todo.ToDoRepo;
 import com.online_dtie_tracker.service.todo.ToDoService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,14 +40,19 @@ public class ToDoServiceImpl implements ToDoService {
 
     @Override
     public List<ToDoDto> findAll() {
-        return toDoRepo.findAll().stream().map(toDo -> {
-            return ToDoDto.builder()
-                    .id(toDo.getId())
+        List<ToDoDto> toDoDtoList = new ArrayList<>();
+
+        //get all task of authorized user
+        List<ToDo> toDoList = toDoRepo.findAllTaskOfAuthorizedUser(AuthorizedUser.getUser().getId());
+        for (ToDo toDo :toDoList){
+                  //add into list
+            toDoDtoList.add(ToDoDto.builder().id(toDo.getId())
                     .title(toDo.getTitle())
                     .toDoDate(toDo.getToDoDate())
                     .toDoStatus(toDo.getToDoStatus())
-                    .user(toDo.getUser()).build();
-        }).collect(Collectors.toList());
+                    .user(toDo.getUser()).build());
+        }
+        return toDoDtoList;
     }
 
     @Override
@@ -73,13 +81,40 @@ public class ToDoServiceImpl implements ToDoService {
 
     //this method return all today task
     public List<ToDo> findAllTodayTask(){
-        return toDoRepo.getTaskByDate(LocalDate.now(), AuthorizedUser.getUser().getId());
+        List<ToDo> toDoList = toDoRepo.getTaskByDate(LocalDate.now(), AuthorizedUser.getUser().getId());
+
+        //find if there any previous pending task
+        List<ToDo> previousPendingTask = toDoRepo.getPreviousPendingTask
+                (LocalDate.now(),AuthorizedUser.getUser().getId());
+
+        if (!previousPendingTask.isEmpty()){
+            for (Integer i =0;i<previousPendingTask.size();i++){
+                //add into today task
+                toDoList.add(i,previousPendingTask.get(i));
+            }
+        }
+       return toDoList;
     }
 
     //find yesterday task
 
     public List<ToDo> findAllYesterdayTask(){
-        return toDoRepo.getTaskByDate(LocalDate.ofEpochDay(2022-03-22),AuthorizedUser.getUser().getId());
+        //get today date
+        LocalDate localDate = LocalDate.now();
+
+        //get yesterday
+        LocalDate previousDate = localDate.minusDays(1);
+
+        return toDoRepo.getTaskByDate(previousDate,AuthorizedUser.getUser().getId());
     }
 
+    //this return how many task has been complete
+    public Double getPercentageOfDoneTask(){
+       Integer doneTask = toDoRepo.getDoneTask(AuthorizedUser.getUser().getId()).size();
+
+       //find how much task complete
+        Double doneTaskPer = Double.valueOf((doneTask * 100)/UserTask.getTotalTask());
+
+       return doneTaskPer;
+    }
 }

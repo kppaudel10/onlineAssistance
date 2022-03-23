@@ -1,6 +1,7 @@
 package com.online_dtie_tracker.controller.todo;
 
 import com.online_dtie_tracker.Dto.ToDoDto;
+import com.online_dtie_tracker.authorizeduser.UserTask;
 import com.online_dtie_tracker.service.impl.ToDoServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/todo")
@@ -22,7 +24,7 @@ public class ToDoController {
 
     @GetMapping("/home")
     public String getToDoHomePage(Model model){
-        model.addAttribute("todayTask",toDoService.findAllTodayTask());
+        model.addAttribute("todo",toDoService.findAllTodayTask());
         return "todo/todohomepage";
     }
 
@@ -54,5 +56,27 @@ public class ToDoController {
     public String getUpdate(@PathVariable Integer id,Model model) throws IOException, ParseException {
         model.addAttribute("toDoDto",toDoService.findById(id));
         return "todo/todoaddpage";
+    }
+
+    // for view yesterday todo details
+    @GetMapping("/previous")
+    public String getPreviousTask(Model model){
+        model.addAttribute("todo",toDoService.findAllYesterdayTask());
+        return "todo/viewprevioustodo";
+    }
+
+    //for views overAll todo details and report
+    @GetMapping("/report")
+    public String getReportPage(Model model){
+        List<ToDoDto> toDoDtoList = toDoService.findAll();
+        model.addAttribute("todo",toDoDtoList);
+
+        //set total toDo task
+        UserTask.setTotalTask(toDoDtoList.size());
+
+        //getPercentage of done task
+        model.addAttribute("doneTaskPercentage",
+                toDoService.getPercentageOfDoneTask());
+        return "todo/todoreport";
     }
 }

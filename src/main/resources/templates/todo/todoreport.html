@@ -24,7 +24,7 @@
                 <th>Title</th>
                 <th>Status</th>
                 <th>Date</th>
-                <th>Action</th>
+                <!--                <th>Action</th>-->
             </tr>
             </thead>
             <tbody>
@@ -33,12 +33,14 @@
                 <td th:text="${i.title}"></td>
                 <td  th:text="${i.toDoStatus.name()}"></td>
                 <td  th:text="${i.toDoDate}"></td>
-                <td>
-                    <a class="button1" th:href="@{/todo/update/{id}(id =${i.id})}">Update</a>
-                </td>
+                <!--                <td>-->
+                <!--                    <a class="button1" th:href="@{/todo/update/{id}(id =${i.id})}">Update</a>-->
+                <!--                </td>-->
             </tr>
             </tbody>
         </table>
+        <h4 th:text="'Total Done Task :'+${doneTaskPercentage} +' %'" style="color: #04AA6D"></h4>
+        <h4 th:text="'Total Pending Task :'+${100 - doneTaskPercentage} +' %'" style="color: red"></h4>
     </div>
 </div>
 </body>

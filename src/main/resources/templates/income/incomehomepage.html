@@ -1,0 +1,43 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="https://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>TODO || HOME</title>-->
+<!--    <link th:href="@{/css/table.css}" rel="stylesheet"/>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <div th:replace="fragment/fragment :: js_link" ></div>-->
+<!--    <div th:replace="fragment/fragment :: css_link" ></div>-->
+<!--    <div th:replace="fragment/fragment :: ganeric_css" ></div>-->
+<!--    <div th:replace="fragment/fragment :: navbar " ></div>-->
+<!--    <div th:replace="fragment/fragment :: homecss " ></div>-->
+<!--    <div class="main">-->
+<!--        <h2 class="head_caption"><u><i>Today ToDo List</i></u></h2>-->
+<!--        <button>-->
+<!--            <a  th:href="@{/todo/add}">Add</a>-->
+<!--        </button>-->
+<!--        <table id="members">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>S.N</th>-->
+<!--                <th>Title</th>-->
+<!--                <th>Status</th>-->
+<!--                <th>Action</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="i,loop:  ${todayTask}">-->
+<!--                <td th:text="${loop.count}"></td>-->
+<!--                <td th:text="${i.title}"></td>-->
+<!--                <td  th:text="${i.toDoStatus.name()}"></td>-->
+<!--                <td>-->
+<!--                    <a class="button1" th:href="@{/todo/update/{id}(id =${i.id})}">Update</a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
