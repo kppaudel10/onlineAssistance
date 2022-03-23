@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.List;
 
 @Controller
 @RequestMapping("/todo")
 public class ToDoController {
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     private final ToDoServiceImpl toDoService;
 
     public ToDoController(ToDoServiceImpl toDoService) {
@@ -80,7 +82,7 @@ public class ToDoController {
 
         //getPercentage of pending task
         model.addAttribute("pendingTaskPercentage",
-               100 - Double.valueOf(toDoService.getPercentageOfDoneTask()));
+               df.format(100 - Double.valueOf(toDoService.getPercentageOfDoneTask())));
         return "todo/todoreport";
     }
 }
