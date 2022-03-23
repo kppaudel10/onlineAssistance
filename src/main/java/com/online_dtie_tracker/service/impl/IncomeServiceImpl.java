@@ -1,6 +1,7 @@
 package com.online_dtie_tracker.service.impl;
 
 import com.online_dtie_tracker.Dto.IncomeDto;
+import com.online_dtie_tracker.authorizeduser.AuthorizedUser;
 import com.online_dtie_tracker.conversion.DtoModelConvert;
 import com.online_dtie_tracker.model.Income;
 import com.online_dtie_tracker.repo.income.IncomeRepo;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,15 +36,19 @@ public class IncomeServiceImpl implements IncomeService {
 
     @Override
     public List<IncomeDto> findAll() {
-        //find all and return by making Dto lsit
-        return incomeRepo.findAll().stream().map(income -> {
-            return IncomeDto.builder()
-                    .id(income.getId())
+        List<IncomeDto> incomeDtoList =new ArrayList<>();
+        List<Income> incomeList =incomeRepo.getAllIncomeList(AuthorizedUser.getUser().getId());
+        for (Income income:incomeList){
+            incomeDtoList.add(
+                    IncomeDto.builder()
+                            .id(income.getId())
                     .source(income.getSource())
                     .amount(income.getAmount())
                     .incomeDate(income.getIncomeDate())
-                    .expensesList(income.getExpensesList()).build();
-        }).collect(Collectors.toList());
+                    .expensesList(income.getExpensesList()).build()
+            );
+        }
+        return incomeDtoList;
     }
 
     @Override
@@ -67,5 +73,9 @@ public class IncomeServiceImpl implements IncomeService {
     @Override
     public void update(IncomeDto incomeDto) throws IOException, ParseException {
 
+    }
+
+    public List<Income> findThisMonthIncomeList(){
+        return null;
     }
 }

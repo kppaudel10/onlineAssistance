@@ -39,7 +39,8 @@ public class DtoModelConvert {
                 .id(incomeDto.getId())
                 .amount(incomeDto.getAmount())
                 .source(incomeDto.getSource())
-                .user(incomeDto.getUser())
+                .incomeDate(new Date())
+                .user(AuthorizedUser.getUser())
 //                .expensesList(incomeDto.getExpensesDtoList())
                 .build();
     }

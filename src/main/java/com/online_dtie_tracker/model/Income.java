@@ -26,6 +26,8 @@ public class Income {
     @Column(nullable = false)
     private Double amount;
 
+    private Double currentAmount;
+
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date incomeDate;

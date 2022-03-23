@@ -13,9 +13,9 @@
     <div th:replace="fragment/fragment :: navbar " ></div>
     <div th:replace="fragment/fragment :: homecss " ></div>
     <div class="main">
-        <h2 class="head_caption"><u><i>Today ToDo List</i></u></h2>
+        <h2 class="head_caption"><u><i>Income List</i></u></h2>
         <button>
-            <a  th:href="@{/todo/add}">Add</a>
+            <a  th:href="@{/income/add}">Add</a>
         </button>
         <table id="members">
             <thead>
@@ -24,19 +24,20 @@
                 <th>Source</th>
                 <th>Current Amount</th>
                 <th>Date</th>
-                <th>Action</th>
+<!--                <th>Action</th>-->
             </tr>
             </thead>
-<!--            <tbody>-->
-<!--            <tr th:each="i,loop:  ${todayTask}">-->
-<!--                <td th:text="${loop.count}"></td>-->
-<!--                <td th:text="${i.title}"></td>-->
-<!--                <td  th:text="${i.toDoStatus.name()}"></td>-->
+            <tbody>
+            <tr th:each="i,loop:  ${incomeDto}">
+                <td th:text="${loop.count}"></td>
+                <td th:text="${i.source}"></td>
+                <td  th:text="${i.amount}"></td>
+                <td  th:text="${i.incomeDate}"></td>
 <!--                <td>-->
 <!--                    <a class="button1" th:href="@{/todo/update/{id}(id =${i.id})}">Update</a>-->
 <!--                </td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
+            </tr>
+            </tbody>
         </table>
     </div>
 </div>
