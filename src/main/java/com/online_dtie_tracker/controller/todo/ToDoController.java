@@ -77,6 +77,10 @@ public class ToDoController {
         //getPercentage of done task
         model.addAttribute("doneTaskPercentage",
                 toDoService.getPercentageOfDoneTask());
+
+        //getPercentage of pending task
+        model.addAttribute("pendingTaskPercentage",
+               100 - Double.valueOf(toDoService.getPercentageOfDoneTask()));
         return "todo/todoreport";
     }
 }

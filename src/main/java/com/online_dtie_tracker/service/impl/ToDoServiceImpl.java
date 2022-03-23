@@ -7,18 +7,18 @@ import com.online_dtie_tracker.conversion.DtoModelConvert;
 import com.online_dtie_tracker.model.ToDo;
 import com.online_dtie_tracker.repo.todo.ToDoRepo;
 import com.online_dtie_tracker.service.todo.ToDoService;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ToDoServiceImpl implements ToDoService {
+    private static final DecimalFormat df = new DecimalFormat("0.00");
     //get toDo repo
     private final ToDoRepo toDoRepo;
 
@@ -32,9 +32,9 @@ public class ToDoServiceImpl implements ToDoService {
         ToDo toDo = new DtoModelConvert().getToDo(toDoDto);
 
         //save into database
-       ToDo toDo1 = toDoRepo.save(toDo);
+        ToDo toDo1 = toDoRepo.save(toDo);
 
-       //return toDoDto with id
+        //return toDoDto with id
         return ToDoDto.builder().id(toDo.getId()).build();
     }
 
@@ -44,8 +44,8 @@ public class ToDoServiceImpl implements ToDoService {
 
         //get all task of authorized user
         List<ToDo> toDoList = toDoRepo.findAllTaskOfAuthorizedUser(AuthorizedUser.getUser().getId());
-        for (ToDo toDo :toDoList){
-                  //add into list
+        for (ToDo toDo : toDoList) {
+            //add into list
             toDoDtoList.add(ToDoDto.builder().id(toDo.getId())
                     .title(toDo.getTitle())
                     .toDoDate(toDo.getToDoDate())
@@ -58,9 +58,9 @@ public class ToDoServiceImpl implements ToDoService {
     @Override
     public ToDoDto findById(Integer integer) throws IOException, ParseException {
         //find by id using repo
-      ToDo toDo =  toDoRepo.findById(integer).get();
+        ToDo toDo = toDoRepo.findById(integer).get();
 
-      //return by making it's Dto
+        //return by making it's Dto
         return ToDoDto.builder()
                 .id(toDo.getId())
                 .title(toDo.getTitle())
@@ -80,41 +80,41 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     //this method return all today task
-    public List<ToDo> findAllTodayTask(){
+    public List<ToDo> findAllTodayTask() {
         List<ToDo> toDoList = toDoRepo.getTaskByDate(LocalDate.now(), AuthorizedUser.getUser().getId());
 
         //find if there any previous pending task
         List<ToDo> previousPendingTask = toDoRepo.getPreviousPendingTask
-                (LocalDate.now(),AuthorizedUser.getUser().getId());
+                (LocalDate.now(), AuthorizedUser.getUser().getId());
 
-        if (!previousPendingTask.isEmpty()){
-            for (Integer i =0;i<previousPendingTask.size();i++){
+        if (!previousPendingTask.isEmpty()) {
+            for (Integer i = 0; i < previousPendingTask.size(); i++) {
                 //add into today task
-                toDoList.add(i,previousPendingTask.get(i));
+                toDoList.add(i, previousPendingTask.get(i));
             }
         }
-       return toDoList;
+        return toDoList;
     }
 
     //find yesterday task
 
-    public List<ToDo> findAllYesterdayTask(){
+    public List<ToDo> findAllYesterdayTask() {
         //get today date
         LocalDate localDate = LocalDate.now();
 
         //get yesterday
         LocalDate previousDate = localDate.minusDays(1);
 
-        return toDoRepo.getTaskByDate(previousDate,AuthorizedUser.getUser().getId());
+        return toDoRepo.getTaskByDate(previousDate, AuthorizedUser.getUser().getId());
     }
 
     //this return how many task has been complete
-    public Double getPercentageOfDoneTask(){
-       Integer doneTask = toDoRepo.getDoneTask(AuthorizedUser.getUser().getId()).size();
+    public String getPercentageOfDoneTask() {
+        Double doneTask = Double.valueOf(toDoRepo.getDoneTask(AuthorizedUser.getUser().getId()).size());
 
-       //find how much task complete
-        Double doneTaskPer = Double.valueOf((doneTask * 100)/UserTask.getTotalTask());
+        //find how much task complete
+        Double doneTaskPer = Double.valueOf((doneTask * 100) / UserTask.getTotalTask());
 
-       return doneTaskPer;
+        return df.format(doneTaskPer);
     }
 }

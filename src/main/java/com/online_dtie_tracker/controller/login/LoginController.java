@@ -46,7 +46,7 @@ public class LoginController {
                 AuthorizedUser.setUser(user);
 
                 model.addAttribute("authorizedUser",user);
-                return "userhomepage/userhomepage";
+                return "user/userhomepage";
             }else {
                 //back to login page
                 model.addAttribute("InvalidMessage","invalid username or password");

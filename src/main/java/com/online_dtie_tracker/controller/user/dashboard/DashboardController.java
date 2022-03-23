@@ -10,6 +10,6 @@ public class DashboardController {
 
     @GetMapping("")
     public String getDashboard(){
-        return "userhomepage/userhomepage";
+        return "user/userhomepage";
     }
 }

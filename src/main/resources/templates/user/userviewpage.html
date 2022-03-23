@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>USER || VIEW</title>
+    <link th:href="@{/css/table.css}" rel="stylesheet"/>
+    <style>
+        .user-profile{
+            margin-top: 50px;
+            position: absolute;
+        }
+        .user-task{
+            margin-top: 150px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragment/fragment :: js_link" ></div>
+    <div th:replace="fragment/fragment :: css_link" ></div>
+    <div th:replace="fragment/fragment :: ganeric_css" ></div>
+    <div th:replace="fragment/fragment :: navbar " ></div>
+    <div th:replace="fragment/fragment :: homecss " ></div>
+    <div class="main">
+        <ul type="none" class="user-profile">
+            <li th:text="'Name: '+${user.name}"></li>
+            <li th:text="'Address: '+${user.address}"></li>
+            <li th:text="'Mobile : '+${user.contact}"></li>
+            <li th:text="'Email: '+${user.email}"></li>
+        </ul>
+        <br>
+        <ul type="none" class="user-task">
+            <li th:text="'Current Task Condition'"></li>
+            <li th:text="'Total Done Task: '+${doneTaskPercentage}+'%'" style="color: #04AA6D"></li>
+            <li th:text="'Total Pending Task: '+${pendingTaskPercentage}+'%'" style="color: red"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
