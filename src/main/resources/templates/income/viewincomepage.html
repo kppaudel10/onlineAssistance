@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO || HOME</title>
+    <link th:href="@{/css/table.css}" rel="stylesheet"/>
+    <style>
+        .basic-details{
+            margin-top: 50px;
+            position: absolute;
+            margin-left: 50px;
+        }
+        #members{
+            margin-left: 50px;
+        }
+        h3{
+            color: #0ebfdf;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragment/fragment :: js_link" ></div>
+    <div th:replace="fragment/fragment :: css_link" ></div>
+    <div th:replace="fragment/fragment :: ganeric_css" ></div>
+    <div th:replace="fragment/fragment :: navbar " ></div>
+    <div th:replace="fragment/fragment :: homecss " ></div>
+    <div class="main">
+            <ul type="none" class="basic-details">
+                <h3>Basic Information</h3>
+                <br>
+                <li th:text="'Source of Income: '+${incomeDto.getSource()}"></li>
+                <li th:text="'Total Amount: '+${incomeDto.fixedAmount}"></li>
+                <li th:text="'Date of Income : '+${incomeDto.getIncomeDate()}"></li>
+                <li th:text="'Current Amount: '+${incomeDto.getAmount()}"></li>
+                <br>
+                <h3>Paid For</h3>
+                <br>
+            </ul>
+            <br>
+                <table id="members" style="margin-top: 230px">
+                    <thead>
+                    <tr>
+                        <th>S.N</th>
+                        <th>Expenses</th>
+                        <th>Amount(Rs.)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="i,loop:  ${expensesList}">
+                        <td th:text="${loop.count}"></td>
+                        <td th:text="${i.expenses_source}"></td>
+                        <td  th:text="${i.expensesAmount}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+    </div>
+</div>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.online_dtie_tracker.service.impl;
 import com.online_dtie_tracker.Dto.ExpensesDto;
 import com.online_dtie_tracker.conversion.DtoModelConvert;
 import com.online_dtie_tracker.model.Expenses;
+import com.online_dtie_tracker.model.Income;
 import com.online_dtie_tracker.repo.expenses.ExpensesRepo;
 import com.online_dtie_tracker.service.expenses.ExpensesService;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class ExpensesServiceImpl implements ExpensesService {
+    private final IncomeServiceImpl incomeService;
     private final ExpensesRepo expensesRepo;
 
-    public ExpensesServiceImpl(ExpensesRepo expensesRepo) {
+    public ExpensesServiceImpl(IncomeServiceImpl incomeService, ExpensesRepo expensesRepo) {
+        this.incomeService = incomeService;
         this.expensesRepo = expensesRepo;
     }
 
@@ -27,6 +30,9 @@ public class ExpensesServiceImpl implements ExpensesService {
 
         //now save into database using repo
        Expenses expenses1 = expensesRepo.save(expenses);
+        //amount need to be paid
+        Double amountToBePaid = expensesDto.getExpensesAmount();
+
 
        //return expensesDto with id
         return ExpensesDto.builder().id(expenses1.getId()).build();

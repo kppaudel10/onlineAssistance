@@ -16,7 +16,7 @@
     <div th:replace="fragment/fragment :: homecss " ></div>
     <div class="main">
         <button>
-            <a th:href="@{/login/home}">Back</a>
+            <a th:href="@{/income/home}">Back</a>
         </button>
         <div class="form-wrap">
             <form th:action="@{/income/add}" th:method="post" th:object="${incomeDto}">

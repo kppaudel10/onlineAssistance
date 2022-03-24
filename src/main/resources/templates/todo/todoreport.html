@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <title>TODO || HOME</title>
     <link th:href="@{/css/table.css}" rel="stylesheet"/>
+    <style>
+        .report{
+            position: absolute;
+            margin-top: 10px;
+            margin-left: 50%;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -39,8 +46,11 @@
             </tr>
             </tbody>
         </table>
-        <h4 th:text="'Total Done Task :'+${doneTaskPercentage} +' %'" style="color: #04AA6D"></h4>
-        <h4 th:text="'Total Pending Task :'+${pendingTaskPercentage} +' %'" style="color: red"></h4>
+        <div class="report">
+            <h4 th:text="'Total Done Task :'+${doneTaskPercentage} +' %'" style="color: #04AA6D"></h4>
+            <h4 th:text="'Total Pending Task :'+${pendingTaskPercentage} +' %'" style="color: red"></h4>
+
+        </div>
     </div>
 </div>
 </body>

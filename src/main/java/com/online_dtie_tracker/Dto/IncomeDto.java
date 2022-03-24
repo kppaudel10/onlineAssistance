@@ -4,6 +4,7 @@ import com.online_dtie_tracker.model.Expenses;
 import com.online_dtie_tracker.model.User;
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -22,6 +23,8 @@ public class IncomeDto {
 
     @NotNull(message = "must not be null")
     private Double amount;
+
+    private Double fixedAmount;
 
     private Date incomeDate;
 

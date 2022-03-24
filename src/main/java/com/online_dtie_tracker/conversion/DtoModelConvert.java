@@ -37,6 +37,7 @@ public class DtoModelConvert {
     public Income getIncome(IncomeDto incomeDto) {
         return Income.builder()
                 .id(incomeDto.getId())
+                .fixedAmount(incomeDto.getFixedAmount())
                 .amount(incomeDto.getAmount())
                 .source(incomeDto.getSource())
                 .incomeDate(new Date())
@@ -55,7 +56,8 @@ public class DtoModelConvert {
                 .id(expensesDto.getId())
                 .expenses_source(expensesDto.getExpensesSource())
                 .expensesAmount(expensesDto.getExpensesAmount())
-                .paidDate(expensesDto.getPaidDate()).build();
+                .incomeList(expensesDto.getIncomeList())
+                .paidDate(new Date()).build();
     }
 
     /**

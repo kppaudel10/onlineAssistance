@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class IncomeServiceImpl implements IncomeService {
@@ -77,5 +76,13 @@ public class IncomeServiceImpl implements IncomeService {
 
     public List<Income> findThisMonthIncomeList(){
         return null;
+    }
+
+    public void updatePaidAmount(Double amount,Integer id){
+        incomeRepo.updatePaidAmount(amount,id);
+    }
+
+    public void updateAmount(Double amount ,Integer id){
+        incomeRepo.updateAmount(amount,id);
     }
 }
