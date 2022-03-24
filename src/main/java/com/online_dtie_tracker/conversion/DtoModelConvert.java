@@ -57,6 +57,7 @@ public class DtoModelConvert {
                 .expenses_source(expensesDto.getExpensesSource())
                 .expensesAmount(expensesDto.getExpensesAmount())
                 .incomeList(expensesDto.getIncomeList())
+                .user(AuthorizedUser.getUser())
                 .paidDate(new Date()).build();
     }
 

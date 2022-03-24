@@ -1,6 +1,7 @@
 package com.online_dtie_tracker.Dto;
 
 import com.online_dtie_tracker.model.Income;
+import com.online_dtie_tracker.model.User;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -27,5 +28,7 @@ public class ExpensesDto {
     private Date paidDate;
 
     private List<Income> incomeList;
+
+    private User user;
 
 }

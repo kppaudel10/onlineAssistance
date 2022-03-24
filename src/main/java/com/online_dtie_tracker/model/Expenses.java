@@ -38,4 +38,10 @@ public class Expenses {
     )
     private List<Income> incomeList;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_user_expenses"))
+    private User user;
+
+
 }

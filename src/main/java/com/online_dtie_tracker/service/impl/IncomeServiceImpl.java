@@ -9,12 +9,16 @@ import com.online_dtie_tracker.service.income.IncomeService;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class IncomeServiceImpl implements IncomeService {
+    //get double value formatter
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+
     private final IncomeRepo incomeRepo;
 
     public IncomeServiceImpl(IncomeRepo incomeRepo) {
@@ -25,7 +29,7 @@ public class IncomeServiceImpl implements IncomeService {
     public IncomeDto save(IncomeDto incomeDto) throws IOException, ParseException {
         //first convert IncomeDto into Income Entity
         Income income = new DtoModelConvert().getIncome(incomeDto);
-
+        income.setFixedAmount(incomeDto.getAmount());
         //save into database
       Income income1 =  incomeRepo.save(income);
 
@@ -60,6 +64,7 @@ public class IncomeServiceImpl implements IncomeService {
                 .id(income.getId())
                 .source(income.getSource())
                 .amount(income.getAmount())
+                .fixedAmount(income.getFixedAmount())
                 .incomeDate(income.getIncomeDate())
                 .expensesList(income.getExpensesList()).build();
     }
@@ -78,11 +83,19 @@ public class IncomeServiceImpl implements IncomeService {
         return null;
     }
 
-    public void updatePaidAmount(Double amount,Integer id){
-        incomeRepo.updatePaidAmount(amount,id);
-    }
 
     public void updateAmount(Double amount ,Integer id){
         incomeRepo.updateAmount(amount,id);
+    }
+
+    public Double getTotalIncome(){
+        List<Income> incomeList = incomeRepo.getAllIncomeList(AuthorizedUser.getUser().getId());
+
+        Double incomeAmount = 0D;
+        //add each income details
+        for (Income income: incomeList){
+            incomeAmount += income.getFixedAmount();
+        }
+        return Double.valueOf(df.format(incomeAmount));
     }
 }

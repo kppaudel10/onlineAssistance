@@ -3,6 +3,8 @@ package com.online_dtie_tracker.controller.user.view;
 import com.online_dtie_tracker.Dto.ToDoDto;
 import com.online_dtie_tracker.authorizeduser.AuthorizedUser;
 import com.online_dtie_tracker.authorizeduser.UserTask;
+import com.online_dtie_tracker.service.impl.ExpensesServiceImpl;
+import com.online_dtie_tracker.service.impl.IncomeServiceImpl;
 import com.online_dtie_tracker.service.impl.ToDoServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +15,16 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/user")
-public class VIewController {
+public class ViewController {
     //get todoService to get task condition
     private final ToDoServiceImpl toDoService;
+    private final IncomeServiceImpl incomeService;
+    private final ExpensesServiceImpl expensesService;
 
-    public VIewController(ToDoServiceImpl toDoService) {
+    public ViewController(ToDoServiceImpl toDoService, IncomeServiceImpl incomeService, ExpensesServiceImpl expensesService) {
         this.toDoService = toDoService;
+        this.incomeService = incomeService;
+        this.expensesService = expensesService;
     }
 
     @GetMapping("/view")
@@ -36,6 +42,11 @@ public class VIewController {
         //getPercentage of pending task
         model.addAttribute("pendingTaskPercentage",
                 100 - Double.valueOf(toDoService.getPercentageOfDoneTask()));
+        //get total income details
+        model.addAttribute("totalIncome",incomeService.getTotalIncome());
+
+        //get total expenses
+        model.addAttribute("totalExpenses",expensesService.getTotalExpenses());
         return "user/userviewpage";
     }
 }

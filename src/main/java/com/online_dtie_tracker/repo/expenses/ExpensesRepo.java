@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface ExpensesRepo extends JpaRepository<Expenses, Integer> {
 
+    @Query(value = "SELECT * FROM tbl_expenses u WHERE u.user_id = ?1", nativeQuery = true)
+    List<Expenses> getAllExpensesList(Integer userId);
 }

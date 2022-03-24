@@ -13,6 +13,10 @@
             margin-top: 150px;
             position: absolute;
         }
+        .user-finance{
+            margin-top: 240px;
+            position: absolute;
+        }
     </style>
 </head>
 <body>
@@ -34,6 +38,12 @@
             <li th:text="'Current Task Condition'"></li>
             <li th:text="'Total Done Task: '+${doneTaskPercentage}+'%'" style="color: #04AA6D"></li>
             <li th:text="'Total Pending Task: '+${pendingTaskPercentage}+'%'" style="color: red"></li>
+        </ul>
+
+        <ul type="none" class="user-finance">
+            <li th:text="'Current Financial Condition'"></li>
+            <li th:text="'Total Income Rs.: '+${totalIncome}" style="color: #04AA6D"></li>
+            <li th:text="'Total ExpensesRs.: '+${totalExpenses}" style="color: red"></li>
         </ul>
     </div>
 </div>

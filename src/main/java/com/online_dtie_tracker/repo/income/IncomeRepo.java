@@ -13,9 +13,7 @@ public interface IncomeRepo extends JpaRepository<Income, Integer> {
     @Query(value = "SELECT * FROM tbl_income u WHERE u.user_id = ?1", nativeQuery = true)
     List<Income> getAllIncomeList(Integer userId);
 
-    @Query(value = "UPDATE tbl_income paid_amount set paid_amount = ?1 WHERE id = ?2", nativeQuery = true)
-    void updatePaidAmount(Double currentAmount , Integer incomeId);
-
     @Query(value = "UPDATE tbl_income amount set amount = ?1 WHERE id = ?2", nativeQuery = true)
-    void updateAmount(Double amount , Integer incomeId);
+    void updateAmount(Double amount, Integer incomeId);
+
 }
