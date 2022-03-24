@@ -1,5 +1,6 @@
 package com.online_dtie_tracker.controller.todo;
 
+import com.online_dtie_tracker.Dto.SearchDto;
 import com.online_dtie_tracker.Dto.ToDoDto;
 import com.online_dtie_tracker.authorizeduser.UserTask;
 import com.online_dtie_tracker.service.impl.ToDoServiceImpl;
@@ -17,6 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/todo")
 public class ToDoController {
+    //get double value formatter
     private static final DecimalFormat df = new DecimalFormat("0.00");
     private final ToDoServiceImpl toDoService;
 
@@ -40,6 +42,7 @@ public class ToDoController {
     public String getAddToDo(@Valid @ModelAttribute("toDoDto") ToDoDto toDoDto,
                              BindingResult bindingResult,Model model) throws IOException, ParseException {
         if (!bindingResult.hasErrors()){
+
             //save into database
            ToDoDto toDoDto1 = toDoService.save(toDoDto);
            if (toDoDto1 !=null){
@@ -47,6 +50,7 @@ public class ToDoController {
                        "Task Added successfully");
            }
         }else {
+            //go to same page with same dto
             model.addAttribute("toDoDto",toDoDto);
             return "todo/todoaddpage";
         }
@@ -64,6 +68,7 @@ public class ToDoController {
     @GetMapping("/previous")
     public String getPreviousTask(Model model){
         model.addAttribute("todo",toDoService.findAllYesterdayTask());
+        model.addAttribute("searchDto",new SearchDto());
         return "todo/viewprevioustodo";
     }
 
@@ -84,5 +89,14 @@ public class ToDoController {
         model.addAttribute("pendingTaskPercentage",
                df.format(100 - Double.valueOf(toDoService.getPercentageOfDoneTask())));
         return "todo/todoreport";
+    }
+
+
+    @PostMapping("/search")
+    public String getSearchPage(@ModelAttribute("searchDto")SearchDto searchDto, Model model) throws ParseException {
+       //find task by date and go to view page
+        model.addAttribute("todo",toDoService.findToDoListByDate(searchDto.getDate()));
+
+        return "todo/viewprevioustodo";
     }
 }

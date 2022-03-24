@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -116,6 +118,11 @@ public class ToDoServiceImpl implements ToDoService {
         Double doneTaskPer = Double.valueOf((doneTask * 100) / UserTask.getTotalTask());
 
         return df.format(doneTaskPer);
+    }
+
+    //return task by date
+    public List<ToDo> findToDoListByDate(String date) throws ParseException {
+        return toDoRepo.findAllTaskByDate(new SimpleDateFormat("yyyy-MM-dd").parse(date),AuthorizedUser.getUser().getId());
     }
 
 }

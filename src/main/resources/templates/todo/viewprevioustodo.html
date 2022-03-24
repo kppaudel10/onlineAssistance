@@ -4,64 +4,7 @@
     <meta charset="UTF-8">
     <title>TODO || HOME</title>
     <link th:href="@{/css/table.css}" rel="stylesheet"/>
-    <style>
-        .search-form {
-            --searchButtonWidth: 75px;
-
-            max-width: 320px;
-            margin-top: 10px;
-            overflow: hidden;
-            position: absolute;
-            width: 400px;
-        }
-
-        .search-input {
-            border: 0;
-            margin: 0;
-            padding: 0.5rem calc(var(--searchButtonWidth) + 0.5rem) 0.5rem 0.5rem;
-            border-radius: 8px;
-            width: 100%;
-            background: #ddd;
-            -webkit-appearance: none;
-            font-size: 13px;
-        }
-        .search-input:focus {
-            outline: 0;
-            background: white;
-        }
-        .search-input:not(:placeholder-shown) ~ .search-button {
-            transform: translateX(calc(-1 * var(--searchButtonWidth)));
-        }
-
-        .search-button {
-            border: 0;
-            padding: 0.5rem;
-            border-radius: 8px;
-            position: absolute;
-            top: 0;
-            left: 100%;
-            width: var(--searchButtonWidth);
-            transition: 0.2s;
-            background: #455A64;
-            color: white;
-            font-size: 13px;
-            height: 100%;
-        }
-        .search-button:focus {
-            outline: 0;
-            background: #222;
-        }
-
-        .screen-reader-text {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
-        .search_form{
-            margin-left: 40%;
-            position: absolute;
-        }
-    </style>
+    <link th:href="@{/css/searchFormCss.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
@@ -72,10 +15,10 @@
     <div th:replace="fragment/fragment :: homecss " ></div>
     <div class="main">
         <div class="search_form">
-            <form  class="search-form">
+            <form th:action="@{/todo/search}" th:method="post" th:object="${searchDto}" class="search-form">
                 <label for="search" class="screen-reader-text">Search</label>
                 <input id="search"
-                       type="search" class="search-input" placeholder="Enter search terms...">
+                       type="search" class="search-input" placeholder="Search by date(yyyy-MM-dd).." th:field="*{date}">
                 <button class="search-button">Search</button>
             </form>
         </div>
