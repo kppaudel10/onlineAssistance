@@ -44,6 +44,7 @@
                         <th>S.N</th>
                         <th>Expenses</th>
                         <th>Amount(Rs.)</th>
+                        <th>Paid Date</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,6 +52,7 @@
                         <td th:text="${loop.count}"></td>
                         <td th:text="${i.expenses_source}"></td>
                         <td  th:text="${i.expensesAmount}"></td>
+                        <td  th:text="${i.paidDate}"></td>
                     </tr>
                     </tbody>
                 </table>
