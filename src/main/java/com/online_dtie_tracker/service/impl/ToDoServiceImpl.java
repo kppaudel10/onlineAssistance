@@ -131,8 +131,8 @@ public class ToDoServiceImpl implements ToDoService {
     //return the list of pending and done task details
     public List<List<Object>> getChartData() {
         return List.of(
-                List.of("PENDING", findAll().size() - getTotalDoneTaskSize()),
-                List.of("DONE", getTotalDoneTaskSize())
+                List.of("DONE",getTotalDoneTaskSize()),
+                List.of("PENDING",findAll().size() - getTotalDoneTaskSize())
         );
     }
 }

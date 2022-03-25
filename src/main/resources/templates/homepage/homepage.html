@@ -3,10 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>DTIETS || HOME</title>
+    <style>
+        .home-image{
+            margin-top: 70px;
+            position: absolute;
+            width: 100%;
+        }
+        .title_demo{
+            color: rgba(50, 238, 5, 0.94);
+            margin-top: 200px;
+            text-align: center;
+            margin-left: 70%;
+            position: absolute;
+            font-size: 30px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="fragment/loginfragment :: loginHome"></div>
 <div th:replace="fragment/loginfragment :: loginHomeCss"></div>
 <div th:replace="fragment/loginfragment :: loginHomeLink"></div>
+<span class="title_demo">
+        <h2>My</h2>
+        <h2>Online</h2>
+        <h2>Assistance</h2>
+    </span>
+<div class="home-image">
+    <div class="col-md-15 col-lg-10 col-xl-9">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid"
+             alt="Sample image">
+    </div>
+</div>
 </body>
 </html>
