@@ -21,4 +21,9 @@ public class FinancialInformation {
                 List.of("Expenses",expensesService.getTotalExpenses())
         );
     }
+
+    //get the current balance after reduce expenses
+    public Double currentBalance(){
+        return incomeService.getTotalIncome() - expensesService.getTotalExpenses();
+    }
 }

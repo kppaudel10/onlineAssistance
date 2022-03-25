@@ -47,6 +47,9 @@ public class ViewController {
 
         //get total expenses
         model.addAttribute("totalExpenses",expensesService.getTotalExpenses());
+
+        //display also current balance
+        model.addAttribute("currentBalance",incomeService.getTotalIncome() - expensesService.getTotalExpenses());
         return "user/userviewpage";
     }
 }

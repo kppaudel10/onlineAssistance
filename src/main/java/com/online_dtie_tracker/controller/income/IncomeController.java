@@ -63,6 +63,7 @@ public class IncomeController {
     @GetMapping("/report")
     public String getReportPage(Model model){
         model.addAttribute("chartData", financialInformation.getChartData());
+        model.addAttribute("currentBalance",financialInformation.currentBalance());
         return "income/incomereport";
     }
 }

@@ -51,7 +51,7 @@ public class ExpensesServiceImpl implements ExpensesService {
                 //update income current Amount
                 incomeDto.setAmount(incomeAmount - amountToBePaid);
                 amountToBePaid = 0D;
-                break;
+
             } else if (amountToBePaid > incomeAmount) {
                 //update income current Amount
                 incomeDto.setAmount(0D);
@@ -62,7 +62,6 @@ public class ExpensesServiceImpl implements ExpensesService {
             } else if (amountToBePaid.equals(incomeAmount)) {
                 incomeDto.setAmount(0D);
                 amountToBePaid = 0D;
-                break;
             }
             incomeService.save(incomeDto);
         }
