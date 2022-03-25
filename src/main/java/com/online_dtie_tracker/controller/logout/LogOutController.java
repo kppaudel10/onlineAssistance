@@ -12,8 +12,8 @@ public class LogOutController {
 
     @GetMapping("")
     public String getLogOut(){
-        //first make Authorized user as null then go to login page
+        //first make Authorized user as null then go to home page
         AuthorizedUser.setUser(new User());
-        return "redirect:/login/home";
+        return "redirect:/";
     }
 }
