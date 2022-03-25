@@ -1,10 +1,10 @@
 package com.online_dtie_tracker.service.impl;
 
 import com.online_dtie_tracker.Dto.ExpensesDto;
+import com.online_dtie_tracker.Dto.IncomeDto;
 import com.online_dtie_tracker.authorizeduser.AuthorizedUser;
 import com.online_dtie_tracker.conversion.DtoModelConvert;
 import com.online_dtie_tracker.model.Expenses;
-import com.online_dtie_tracker.model.Income;
 import com.online_dtie_tracker.repo.expenses.ExpensesRepo;
 import com.online_dtie_tracker.service.expenses.ExpensesService;
 import org.springframework.stereotype.Service;
@@ -34,33 +34,40 @@ public class ExpensesServiceImpl implements ExpensesService {
         Expenses expenses = new DtoModelConvert().getExpenses(expensesDto);
 
         //now save into database using repo
-       Expenses expenses1 = expensesRepo.save(expenses);
+        Expenses expenses1 = expensesRepo.save(expenses);
         //amount need to be paid
         Double amountToBePaid = expensesDto.getExpensesAmount();
 
-        for (Integer i =0;i<expensesDto.getIncomeList().size();i++){
+        for (Integer i = 0; i < expensesDto.getIncomeList().size(); i++) {
+            Integer incomeId = expensesDto.getIncomeList().get(i).getId();
+
+            IncomeDto incomeDto = incomeService.findById(incomeId);
 
             Double incomeAmount = expensesDto.getIncomeList().get(i).getAmount();
 
-            Integer incomeId = expensesDto.getIncomeList().get(i).getId();
 
             //paid amount is less that selected income source then
-            if (amountToBePaid < incomeAmount){
+            if (amountToBePaid < incomeAmount) {
                 //update income current Amount
-                incomeService.updateAmount(incomeAmount - amountToBePaid,incomeId);
+                incomeDto.setAmount(incomeAmount - amountToBePaid);
                 amountToBePaid = 0D;
                 break;
-            }else if(amountToBePaid > incomeAmount){
+            } else if (amountToBePaid > incomeAmount) {
                 //update income current Amount
-                incomeService.updateAmount(0.0,incomeId);
+                incomeDto.setAmount(0D);
 
                 //decrease amount of paid
                 amountToBePaid = amountToBePaid - incomeAmount;
 
+            } else if (amountToBePaid.equals(incomeAmount)) {
+                incomeDto.setAmount(0D);
+                amountToBePaid = 0D;
+                break;
             }
+            incomeService.save(incomeDto);
         }
 
-       //return expensesDto with id
+        //return expensesDto with id
         return ExpensesDto.builder().id(expenses1.getId()).build();
     }
 
@@ -80,7 +87,7 @@ public class ExpensesServiceImpl implements ExpensesService {
     @Override
     public ExpensesDto findById(Integer integer) throws IOException, ParseException {
         //find Expenses by id
-      Expenses expenses =  expensesRepo.findById(integer).get();
+        Expenses expenses = expensesRepo.findById(integer).get();
         return ExpensesDto.builder()
                 .id(expenses.getId())
                 .expensesSource(expenses.getExpenses_source())
@@ -99,12 +106,12 @@ public class ExpensesServiceImpl implements ExpensesService {
 
     }
 
-    public Double getTotalExpenses(){
+    public Double getTotalExpenses() {
         //total of current user
-       List<Expenses> expensesList = expensesRepo.getAllExpensesList(AuthorizedUser.getUser().getId());
+        List<Expenses> expensesList = expensesRepo.getAllExpensesList(AuthorizedUser.getUser().getId());
         //add all expenses amount
         Double expensesAmount = 0D;
-        for (Expenses expenses:expensesList){
+        for (Expenses expenses : expensesList) {
             //add all expenses amount
             expensesAmount += expenses.getExpensesAmount();
         }
