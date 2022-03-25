@@ -19,13 +19,13 @@ public class ToDo {
     @SequenceGenerator(name ="toDO_sequence",sequenceName = "toDo_sequence",allocationSize = 15)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     private String title;
 
     @Column(nullable = false)
     private ToDoStatus toDoStatus;
 
-    @Column(nullable = false)
+    @Column(nullable = false,updatable = false)
     @Temporal(TemporalType.DATE)
     private Date toDoDate;
 

@@ -26,4 +26,5 @@ public interface ToDoRepo extends JpaRepository<ToDo, Integer> {
 
     @Query(value = "SELECT * FROM tbl_to_do u WHERE u.to_do_date = ?1 and u.user_id = ?2", nativeQuery = true)
     List<ToDo> findAllTaskByDate(Date date , Integer userId);
+
 }

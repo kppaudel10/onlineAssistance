@@ -1,57 +1,57 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>TODO || HOME</title>
-    <link th:href="@{/css/table.css}" rel="stylesheet"/>
-    <style>
-        .report{
-            position: absolute;
-            margin-top: 10px;
-            margin-left: 50%;
-            background-color: #ffffff;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div th:replace="fragment/fragment :: js_link" ></div>
-    <div th:replace="fragment/fragment :: css_link" ></div>
-    <div th:replace="fragment/fragment :: ganeric_css" ></div>
-    <div th:replace="fragment/fragment :: navbar " ></div>
-    <div th:replace="fragment/fragment :: homecss " ></div>
-    <div class="main">
-        <h2 class="head_caption"><u><i>ToDo List</i></u></h2>
-        <button>
-            <a  th:href="@{/todo/add}">Add</a>
-        </button>
-        <table id="members">
-            <thead>
-            <tr>
-                <th>S.N</th>
-                <th>Title</th>
-                <th>Status</th>
-                <th>Date</th>
-                <!--                <th>Action</th>-->
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="i,loop:  ${todo}">
-                <td th:text="${loop.count}"></td>
-                <td th:text="${i.title}"></td>
-                <td  th:text="${i.toDoStatus.name()}"></td>
-                <td  th:text="${i.toDoDate}"></td>
-                <!--                <td>-->
-                <!--                    <a class="button1" th:href="@{/todo/update/{id}(id =${i.id})}">Update</a>-->
-                <!--                </td>-->
-            </tr>
-            </tbody>
-        </table>
-        <div class="report">
-            <h4 th:text="'Total Done Task :'+${doneTaskPercentage} +' %'" style="color: #04AA6D"></h4>
-            <h4 th:text="'Total Pending Task :'+${pendingTaskPercentage} +' %'" style="color: red"></h4>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="https://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>TODO || HOME</title>-->
+<!--    <link th:href="@{/css/table.css}" rel="stylesheet"/>-->
+<!--    <style>-->
+<!--        .report{-->
+<!--            position: absolute;-->
+<!--            margin-top: 10px;-->
+<!--            margin-left: 50%;-->
+<!--            background-color: #ffffff;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <div th:replace="fragment/fragment :: js_link" ></div>-->
+<!--    <div th:replace="fragment/fragment :: css_link" ></div>-->
+<!--    <div th:replace="fragment/fragment :: ganeric_css" ></div>-->
+<!--    <div th:replace="fragment/fragment :: navbar " ></div>-->
+<!--    <div th:replace="fragment/fragment :: homecss " ></div>-->
+<!--    <div class="main">-->
+<!--        <h2 class="head_caption"><u><i>ToDo List</i></u></h2>-->
+<!--        <button>-->
+<!--            <a  th:href="@{/todo/add}">Add</a>-->
+<!--        </button>-->
+<!--        <table id="members">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>S.N</th>-->
+<!--                <th>Title</th>-->
+<!--                <th>Status</th>-->
+<!--                <th>Date</th>-->
+<!--                &lt;!&ndash;                <th>Action</th>&ndash;&gt;-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="i,loop:  ${todo}">-->
+<!--                <td th:text="${loop.count}"></td>-->
+<!--                <td th:text="${i.title}"></td>-->
+<!--                <td  th:text="${i.toDoStatus.name()}"></td>-->
+<!--                <td  th:text="${i.toDoDate}"></td>-->
+<!--                &lt;!&ndash;                <td>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <a class="button1" th:href="@{/todo/update/{id}(id =${i.id})}">Update</a>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </td>&ndash;&gt;-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--        <div class="report">-->
+<!--            <h4 th:text="'Total Done Task :'+${doneTaskPercentage} +' %'" style="color: #04AA6D"></h4>-->
+<!--            <h4 th:text="'Total Pending Task :'+${pendingTaskPercentage} +' %'" style="color: red"></h4>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

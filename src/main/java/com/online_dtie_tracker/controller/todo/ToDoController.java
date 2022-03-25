@@ -81,14 +81,8 @@ public class ToDoController {
         //set total toDo task
         UserTask.setTotalTask(toDoDtoList.size());
 
-        //getPercentage of done task
-        model.addAttribute("doneTaskPercentage",
-                toDoService.getPercentageOfDoneTask());
-
-        //getPercentage of pending task
-        model.addAttribute("pendingTaskPercentage",
-               df.format(100 - Double.valueOf(toDoService.getPercentageOfDoneTask())));
-        return "todo/todoreport";
+        model.addAttribute("chartData", toDoService.getChartData());
+        return "todo/piechart";
     }
 
 
@@ -99,4 +93,5 @@ public class ToDoController {
 
         return "todo/viewprevioustodo";
     }
+
 }

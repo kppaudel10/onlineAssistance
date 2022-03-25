@@ -15,7 +15,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -125,4 +124,15 @@ public class ToDoServiceImpl implements ToDoService {
         return toDoRepo.findAllTaskByDate(new SimpleDateFormat("yyyy-MM-dd").parse(date),AuthorizedUser.getUser().getId());
     }
 
+    public Integer getTotalDoneTaskSize(){
+        return toDoRepo.getDoneTask(AuthorizedUser.getUser().getId()).size();
+    }
+
+    //return the list of pending and done task details
+    public List<List<Object>> getChartData() {
+        return List.of(
+                List.of("PENDING", findAll().size() - getTotalDoneTaskSize()),
+                List.of("DONE", getTotalDoneTaskSize())
+        );
+    }
 }
