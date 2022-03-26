@@ -19,7 +19,8 @@
             position: absolute;
             width: 410px;
             /*margin-top: 50px;*/
-            /*margin-left: 10px;*/
+            margin-left: 0px;
+            align-items: flex-start;
             /*padding: 5px;*/
 
         }
@@ -51,7 +52,7 @@
         .inputs input[type="submit"] {
             height: 3.0rem;
             width: 5.5rem;
-            background: #0a67ca;
+            background: rgba(50, 238, 5, 0.94);
             font-weight: bold;
             color: white;
             font-size: 1.2rem;
@@ -109,7 +110,7 @@
 <div th:replace="fragment/fragment :: homecss " ></div>
 <div class="main">
     <div class="container-fluid">
-        <section class="main">
+        <section>
             <section class="inputs">
                     <input type="text" th:placeholder="*{address}"
                            th:value="*{address}"  id="cityinput">

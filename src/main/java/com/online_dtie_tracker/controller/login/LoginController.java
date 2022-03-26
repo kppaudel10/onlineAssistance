@@ -46,7 +46,8 @@ public class LoginController {
                 AuthorizedUser.setUser(user);
 
                 model.addAttribute("authorizedUser",user);
-                return "redirect:/dashboard/";
+                model.addAttribute("address",AuthorizedUser.getUser().getAddress());
+                return "user/userhomepage";
             }else {
                 //back to login page
                 model.addAttribute("InvalidMessage","invalid username or password");
