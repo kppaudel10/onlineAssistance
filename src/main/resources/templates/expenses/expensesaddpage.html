@@ -37,7 +37,7 @@
                     <option value="">Select income source</option>
                     <th:block th:each="part : ${incomeList}">
                         <option th:value="${part.id}"
-                                th:text="${part.source }">
+                                th:text="${part.source}+' Rs.'+${part.amount}">
                         </option>
                     </th:block>
                 </select>

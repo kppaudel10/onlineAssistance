@@ -5,6 +5,7 @@ import com.online_dtie_tracker.Dto.IncomeDto;
 import com.online_dtie_tracker.authorizeduser.AuthorizedUser;
 import com.online_dtie_tracker.conversion.DtoModelConvert;
 import com.online_dtie_tracker.model.Expenses;
+import com.online_dtie_tracker.model.Income;
 import com.online_dtie_tracker.repo.expenses.ExpensesRepo;
 import com.online_dtie_tracker.service.expenses.ExpensesService;
 import org.springframework.stereotype.Service;
@@ -115,5 +116,25 @@ public class ExpensesServiceImpl implements ExpensesService {
             expensesAmount += expenses.getExpensesAmount();
         }
         return Double.valueOf(df.format(expensesAmount));
+    }
+
+
+    //check this expenses can paid by the selected list of income
+    public Boolean canPaidThatExpenses(ExpensesDto expensesDto){
+        //expenses amount
+        Double amountToBePaid = expensesDto.getExpensesAmount();
+
+        //total income amount
+        Double incomeAmount =0D;
+        //calculate the total money of selected income lsit
+        for (Income income :expensesDto.getIncomeList()){
+            //add income current amount
+            incomeAmount += income.getAmount();
+        }
+        if (amountToBePaid > incomeAmount){
+            return false;
+        }else {
+            return true;
+        }
     }
 }

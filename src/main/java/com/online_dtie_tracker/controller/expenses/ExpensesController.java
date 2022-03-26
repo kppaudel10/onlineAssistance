@@ -35,8 +35,8 @@ public class ExpensesController {
 
     @GetMapping("/add")
     public String getExpensesAddPage(Model model){
-        model.addAttribute("expensesDto",new ExpensesDto());
         model.addAttribute("incomeList",incomeService.findAll());
+        model.addAttribute("expensesDto",new ExpensesDto());
         return "expenses/expensesaddpage";
     }
 
@@ -44,14 +44,25 @@ public class ExpensesController {
     public String getAddExpenses(@Valid @ModelAttribute("expensesDto")ExpensesDto expensesDto,
                                  BindingResult bindingResult,Model model) throws IOException, ParseException {
         if (!bindingResult.hasErrors()){
-            //save into database
-          ExpensesDto expensesDto1 =  expensesService.save(expensesDto);
-          if (expensesDto1 !=null){
-              model.addAttribute("message","Expenses added successfully");
-          }else {
-              model.addAttribute("message","Unable to add expenses details");
+            //check can paid or not
+            Boolean canPaid = expensesService.canPaidThatExpenses(expensesDto);
+
+          if (canPaid){
+              //save into database
+              ExpensesDto expensesDto1 =  expensesService.save(expensesDto);
+              if (expensesDto1 !=null){
+                  model.addAttribute("message","Expenses added successfully");
+              }else {
+
+                  model.addAttribute("message","Unable to add expenses details");
+              }
+          }
+          else {
+              model.addAttribute("message","Can not paid by this income source");
           }
         }
+        //go to the same page
+        model.addAttribute("incomeList",incomeService.findAll());
         model.addAttribute("expensesDto",expensesDto);
         return "expenses/expensesaddpage";
     }
