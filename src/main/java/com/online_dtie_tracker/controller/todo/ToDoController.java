@@ -1,13 +1,17 @@
 package com.online_dtie_tracker.controller.todo;
 
+import com.online_dtie_tracker.Dto.ExpensesDto;
 import com.online_dtie_tracker.Dto.SearchDto;
 import com.online_dtie_tracker.Dto.ToDoDto;
 import com.online_dtie_tracker.authorizeduser.UserTask;
+import com.online_dtie_tracker.excelgenerate.expenses.ExpensesDataExcelExport;
+import com.online_dtie_tracker.excelgenerate.todo.ToDoDataExcelExport;
 import com.online_dtie_tracker.service.impl.ToDoServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -95,6 +99,21 @@ public class ToDoController {
         model.addAttribute("todo",toDoService.findToDoListByDate(searchDto.getDate()));
 
         return "todo/viewprevioustodo";
+    }
+
+    @GetMapping("/excel/export")
+    public ModelAndView exportIncomeDataIntoExcel(){
+        ModelAndView modelAndView = new ModelAndView();
+        //set view
+        modelAndView.setView(new ToDoDataExcelExport());
+
+        //read the data from database
+        List<ToDoDto> toDoDtoList = toDoService.findAll();
+
+        //send that list to excelImpl class
+        modelAndView.addObject("list",toDoDtoList);
+
+        return modelAndView;
     }
 
 }
