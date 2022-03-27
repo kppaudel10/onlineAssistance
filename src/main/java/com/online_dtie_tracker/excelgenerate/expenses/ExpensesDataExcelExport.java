@@ -18,7 +18,7 @@ public class ExpensesDataExcelExport extends AbstractXlsxView {
     protected void buildExcelDocument(Map<String, Object> model,
                                       Workbook workbook, HttpServletRequest request,
                                       HttpServletResponse response) throws Exception {
-        response.addHeader("Content-Disposition","attachment;fileName=incomeData.xlsx");
+        response.addHeader("Content-Disposition","attachment;fileName=expensesData.xlsx");
 
         @SuppressWarnings("unchecked")
         List<ExpensesDto> list = (List<ExpensesDto>) model.get("list");
