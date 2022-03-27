@@ -36,9 +36,17 @@
     </script>
     <style>
         .chart-display{
-            margin-top: 50px;
+            margin-top: 79px;
             margin-left: 45%;
-            margin-right: 20px;
+            margin-right: 10px;
+            position: absolute;
+        }
+        .head-display{
+            color: #04AA6D;
+            margin-top: 40px;
+            font-size: 22px;
+            margin-left: 38%;
+            margin-right: 20%;
             position: absolute;
         }
     </style>
@@ -50,14 +58,17 @@
     <div th:replace="fragment/fragment :: ganeric_css" ></div>
     <div th:replace="fragment/fragment :: navbar " ></div>
     <div th:replace="fragment/fragment :: homecss " ></div>
+    <span class="head-display">
+        <h2><u>Your Task Statement</u></h2>
+    </span>
     <div class="main">
        <span class="chart-display">
-           <h3 style="color: #04AA6D">Your Current Task Condition</h3>
+<!--           <h3 style="color: #04AA6D">Your Current Task Condition</h3>-->
            <br>
            <div id="chart_div"></div>
        </span>
         <span>
-             <h3 class="head_caption"><u><i>ToDo List</i></u></h3>
+<!--             <h3 class="head_caption"><u><i>ToDo List</i></u></h3>-->
 <!--        <button>-->
 <!--            <a  th:href="@{/todo/add}">Add</a>-->
 <!--        </button>-->
