@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,14 +75,19 @@ public class ExpensesServiceImpl implements ExpensesService {
     @Override
     public List<ExpensesDto> findAll() {
         //return list of ExpensesDto form database
-        return expensesRepo.findAll().stream().map(expenses -> {
-            return ExpensesDto.builder()
+        List<ExpensesDto> expensesDtoList = new ArrayList<>();
+        //get expenses list of authorized user
+        List<Expenses> expensesList = expensesRepo.getAllExpensesList(AuthorizedUser.getUser().getId());
+
+        for (Expenses expenses : expensesList){
+            expensesDtoList.add(ExpensesDto.builder()
                     .id(expenses.getId())
                     .expensesSource(expenses.getExpenses_source())
                     .expensesAmount(expenses.getExpensesAmount())
                     .paidDate(expenses.getPaidDate())
-                    .incomeList(expenses.getIncomeList()).build();
-        }).collect(Collectors.toList());
+                    .incomeList(expenses.getIncomeList()).build());
+        }
+        return expensesDtoList;
     }
 
     @Override

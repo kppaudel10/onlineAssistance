@@ -45,7 +45,7 @@ public class IncomeServiceImpl implements IncomeService {
             incomeDtoList.add(
                     IncomeDto.builder()
                             .id(income.getId())
-                    .source(income.getSource())
+                    .source(income.getSource()).fixedAmount(income.getFixedAmount())
                     .amount(income.getAmount())
                     .incomeDate(income.getIncomeDate())
                     .expensesList(income.getExpensesList()).build()

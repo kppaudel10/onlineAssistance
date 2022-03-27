@@ -26,8 +26,8 @@
 
             // Set chart options
             var options = {'title':'Financial statement',
-                'width':500,
-                'height':400};
+                'width':400,
+                'height':300};
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -36,10 +36,30 @@
     </script>
     <style>
         .chart-display{
-            margin-top: 50px;
-            margin-left: 10%;
+            margin-top: 79px;
+            margin-left: 47%;
+            margin-right: 10px;
             position: absolute;
         }
+        .expenses-head{
+            font-size: 24px;
+            color: red;
+            text-align: center;
+        }
+       .income_head{
+           font-size: 24px;
+           color:blue;
+           text-align: center;
+           background-color: #d3eeee;
+       }
+       .head-display{
+           color: #04AA6D;
+           margin-top: 40px;
+           font-size: 24px;
+           margin-left: 30%;
+           margin-right: 20%;
+           position: absolute;
+       }
     </style>
 </head>
 <body>
@@ -49,13 +69,62 @@
     <div th:replace="fragment/fragment :: ganeric_css" ></div>
     <div th:replace="fragment/fragment :: navbar " ></div>
     <div th:replace="fragment/fragment :: homecss " ></div>
+    <span class="head-display">
+        <h2>Your Financial Statement</h2>
+    </span>
     <div class="main">
-        <div class="chart-display">
-            <h2 style="color: #04AA6D">Your Financial Statement</h2>
+        <span class="chart-display">
+<!--            <h2 style="color: #04AA6D">Your Financial Statement</h2>-->
             <br>
             <div id="chart_div"></div>
-            <h4 th:text="'Current Balance: Rs.'+${currentBalance}"></h4>
-        </div>
+            <h4 th:text="'Current Balance: Rs.'+${currentBalance}" style="color: #0d6ad7"></h4>
+        </span>
+        <span>
+        <table id="members" style="margin-right: 30%">
+            <thead>
+            <tr>
+                <td th:colspan="5" class="income_head" style="background-color: white"><u><i><b>Income Details</b></i></u></td>
+            </tr>
+            <tr>
+                <th>S.N</th>
+                <th>Source</th>
+                <th>TB (Rs)</th>
+                <th>CB (Rs)</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="i,loop:  ${incomeList}">
+                <td th:text="${loop.count}"></td>
+                <td th:text="${i.source}"></td>
+                <td th:text="${i.fixedAmount}"></td>
+                <td  th:text="${i.amount}"></td>
+                <td  th:text="${i.incomeDate}"></td>
+            </tr>
+            <tr>
+                <td th:colspan="5" style="color: #d3eeee">-</td>
+            </tr>
+            <tr>
+                <td th:colspan="5" class="expenses-head" style="background-color: white"><u><b><i>Expenses Details</i></i></b></u></td>
+            </tr>
+            <tr>
+                <th>S.N</th>
+                <th>Expenses</th>
+                <th>Amount (Rs)</th>
+                <th>Date</th>
+            </tr>
+            <tr th:each="i,loop:  ${expensesList}">
+                <td th:text="${loop.count}"></td>
+                <td th:text="${i.expensesSource}"></td>
+                <td  th:text="${i.expensesAmount}"></td>
+                <td  th:text="${i.paidDate}"></td>
+            </tr>
+            <tr>
+                <td th:colspan="4" style="color: white">-</td>
+            </tr>
+            </tbody>
+        </table>
+        </span>
     </div>
 </div>
 </body>

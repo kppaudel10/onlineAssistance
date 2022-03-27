@@ -1,6 +1,7 @@
 package com.online_dtie_tracker.controller.income;
 
 import com.online_dtie_tracker.Dto.IncomeDto;
+import com.online_dtie_tracker.service.impl.ExpensesServiceImpl;
 import com.online_dtie_tracker.service.impl.FinancialInformation;
 import com.online_dtie_tracker.service.impl.IncomeServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,12 @@ import java.text.ParseException;
 public class IncomeController {
     private final IncomeServiceImpl incomeService;
     private final FinancialInformation financialInformation;
+    private final ExpensesServiceImpl expensesService;
 
-    public IncomeController(IncomeServiceImpl incomeService, FinancialInformation financialInformation) {
+    public IncomeController(IncomeServiceImpl incomeService, FinancialInformation financialInformation, ExpensesServiceImpl expensesService) {
         this.incomeService = incomeService;
         this.financialInformation = financialInformation;
+        this.expensesService = expensesService;
     }
 
     @GetMapping("/home")
@@ -66,8 +69,18 @@ public class IncomeController {
 
     @GetMapping("/report")
     public String getReportPage(Model model){
+        //data for financial information
         model.addAttribute("chartData", financialInformation.getChartData());
+
+        //for display current balance
         model.addAttribute("currentBalance",financialInformation.currentBalance());
+
+        //add total income list
+        model.addAttribute("incomeList",incomeService.findAll());
+
+        //add all expenses list
+        model.addAttribute("expensesList",expensesService.findAll());
+
         return "income/incomereport";
     }
 }
