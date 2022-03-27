@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>TODO || HOME</title>
+    <title>EXPENSES || HOME</title>
     <link th:href="@{/css/table.css}" rel="stylesheet"/>
 </head>
 <body>
@@ -24,7 +24,7 @@
                 <th>Expenses for</th>
                 <th>Amount</th>
                 <th>Date</th>
-                <!--                <th>Action</th>-->
+                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -33,9 +33,9 @@
                 <td th:text="${i.expensesSource}"></td>
                 <td  th:text="${i.expensesAmount}"></td>
                 <td  th:text="${i.paidDate}"></td>
-                <!--                <td>-->
-                <!--                    <a class="button1" th:href="@{/todo/update/{id}(id =${i.id})}">Update</a>-->
-                <!--                </td>-->
+                <td>
+                    <a class="button1" th:href="@{/expenses/view/{id}(id =${i.id})}">View</a>
+                </td>
             </tr>
             </tbody>
         </table>

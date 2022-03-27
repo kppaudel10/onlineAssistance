@@ -11,9 +11,12 @@ import java.util.List;
 public interface IncomeRepo extends JpaRepository<Income, Integer> {
 
     @Query(value = "SELECT * FROM tbl_income u WHERE u.user_id = ?1 and u.amount > 0", nativeQuery = true)
-    List<Income> getAllIncomeList(Integer userId);
+    List<Income> getAllIncomeListAmountMoreThanZero(Integer userId);
 
     @Query(value = "UPDATE tbl_income amount set amount = ?1 WHERE id = ?2", nativeQuery = true)
     void updateAmount(Double amount, Integer incomeId);
+
+    @Query(value = "SELECT * FROM tbl_income u WHERE u.user_id = ?1", nativeQuery = true)
+    List<Income> getAllIncomeList(Integer userId);
 
 }

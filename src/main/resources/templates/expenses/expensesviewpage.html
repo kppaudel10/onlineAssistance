@@ -2,8 +2,21 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>INCOME || HOME</title>
+    <title>EXPENSES || VIEW</title>
     <link th:href="@{/css/table.css}" rel="stylesheet"/>
+    <style>
+        .basic-details{
+            margin-top: 50px;
+            position: absolute;
+            margin-left: 50px;
+        }
+        #members{
+            margin-left: 50px;
+        }
+        h3{
+            color: #0ebfdf;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -13,26 +26,31 @@
     <div th:replace="fragment/fragment :: navbar " ></div>
     <div th:replace="fragment/fragment :: homecss " ></div>
     <div class="main">
-        <h2 class="head_caption"><u><i>Income List</i></u></h2>
-        <button>
-            <a  th:href="@{/income/add}">Add</a>
-        </button>
-        <table id="members">
+        <ul type="none" class="basic-details">
+            <h3>Basic Details</h3>
+            <br>
+            <li th:text="'Field of Expenses : '+${expensesDto.expensesSource}"></li>
+            <li th:text="'Expenses Amount Rs.: '+${expensesDto.expensesAmount}"></li>
+            <li th:text="'Date of Paid : '+${expensesDto.paidDate}"></li>
+            <br>
+            <h3>Paid By</h3>
+        </ul>
+        <table id="members" style="margin-top: 230px">
             <thead>
             <tr>
                 <th>S.N</th>
-                <th>Source</th>
+                <th>Income Source</th>
                 <th>Current Balance</th>
-                <th>Date</th>
+                <th>Income Date</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="i,loop:  ${incomeDto}">
+            <tr th:each="i,loop:  ${incomeList}">
                 <td th:text="${loop.count}"></td>
                 <td th:text="${i.source}"></td>
-                <td  th:text="${i.amount}"></td>
-                <td  th:text="${i.incomeDate}"></td>
+                <td th:text="${i.amount}"></td>
+                <td th:text="${i.incomeDate}"></td>
                 <td>
                     <a class="button1" th:href="@{/income/view/{id}(id =${i.id})}">View</a>
                 </td>

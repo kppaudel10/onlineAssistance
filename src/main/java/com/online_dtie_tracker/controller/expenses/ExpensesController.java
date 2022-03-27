@@ -6,10 +6,7 @@ import com.online_dtie_tracker.service.impl.IncomeServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -70,5 +67,17 @@ public class ExpensesController {
         model.addAttribute("incomeList",incomeService.getAllIncomeListMoreThenZeroAmount());
         model.addAttribute("expensesDto",expensesDto);
         return "expenses/expensesaddpage";
+    }
+
+    @GetMapping("/view/{id}")
+    public String getViewPage(@PathVariable("id")Integer integer,Model model) throws IOException, ParseException {
+        //details about particular expenses
+        ExpensesDto expensesDto = expensesService.findById(integer);
+
+        model.addAttribute("expensesDto",expensesDto);
+
+        //get details of income of particular expenses
+        model.addAttribute("incomeList",expensesDto.getIncomeList());
+        return "expenses/expensesviewpage";
     }
 }

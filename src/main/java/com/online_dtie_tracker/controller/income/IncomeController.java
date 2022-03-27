@@ -55,8 +55,12 @@ public class IncomeController {
 
     @GetMapping("/view/{id}")
     public String getViewIncomePage(@PathVariable Integer id,Model model) throws IOException, ParseException {
+       //get details of particular income
         model.addAttribute("incomeDto",incomeService.findById(id));
+
+        //get all expenses list that is paid by that income source
         model.addAttribute("expensesList",incomeService.findById(id).getExpensesList());
+
         return "income/viewincomepage";
     }
 

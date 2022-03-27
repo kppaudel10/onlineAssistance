@@ -81,7 +81,7 @@ public class IncomeServiceImpl implements IncomeService {
 
     //this method return if income amount is more than 0
     public List<Income> getAllIncomeListMoreThenZeroAmount(){
-        return incomeRepo.getAllIncomeList(AuthorizedUser.getUser().getId());
+        return incomeRepo.getAllIncomeListAmountMoreThanZero(AuthorizedUser.getUser().getId());
     }
 
 
@@ -90,7 +90,7 @@ public class IncomeServiceImpl implements IncomeService {
     }
 
     public Double getTotalIncome(){
-        List<Income> incomeList = incomeRepo.getAllIncomeList(AuthorizedUser.getUser().getId());
+        List<Income> incomeList = incomeRepo.getAllIncomeListAmountMoreThanZero(AuthorizedUser.getUser().getId());
 
         Double incomeAmount = 0D;
         //add each income details
