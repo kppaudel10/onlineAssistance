@@ -6,6 +6,22 @@
     <link th:href="@{/css/table.css}" rel="stylesheet"/>
     <link th:href="@{/css/formCss.css}" rel="stylesheet"/>
     <link th:href="@{/css/displayError.css}" rel="stylesheet"/>
+    <script>
+        window.onmousedown = function (e) {
+            var el = e.target;
+            if (el.tagName.toLowerCase() == 'option' && el.parentNode.hasAttribute('multiple')) {
+                e.preventDefault();
+
+                // toggle selection
+                if (el.hasAttribute('selected')) el.removeAttribute('selected');
+                else el.setAttribute('selected', '');
+
+                // hack to correct buggy behavior
+                var select = el.parentNode.cloneNode(true);
+                el.parentNode.parentNode.replaceChild(select, el.parentNode);
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -34,7 +50,7 @@
                 <br>
                 <label>Select Income Source: </label>
                 <select th:field="*{incomeList}" class="multipleSelect" multiple required>
-                    <option value="">Select income source</option>
+<!--                    <option value="">Select income source</option>-->
                     <th:block th:each="part : ${incomeList}">
                         <option th:value="${part.id}"
                                 th:text="${part.source}+' Rs.'+${part.amount}">

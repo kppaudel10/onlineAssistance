@@ -79,8 +79,9 @@ public class IncomeServiceImpl implements IncomeService {
 
     }
 
-    public List<Income> findThisMonthIncomeList(){
-        return null;
+    //this method return if income amount is more than 0
+    public List<Income> getAllIncomeListMoreThenZeroAmount(){
+        return incomeRepo.getAllIncomeList(AuthorizedUser.getUser().getId());
     }
 
 

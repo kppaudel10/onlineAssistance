@@ -35,7 +35,7 @@ public class ExpensesController {
 
     @GetMapping("/add")
     public String getExpensesAddPage(Model model){
-        model.addAttribute("incomeList",incomeService.findAll());
+        model.addAttribute("incomeList",incomeService.getAllIncomeListMoreThenZeroAmount());
         model.addAttribute("expensesDto",new ExpensesDto());
         return "expenses/expensesaddpage";
     }
@@ -48,21 +48,26 @@ public class ExpensesController {
             Boolean canPaid = expensesService.canPaidThatExpenses(expensesDto);
 
           if (canPaid){
-              //save into database
-              ExpensesDto expensesDto1 =  expensesService.save(expensesDto);
-              if (expensesDto1 !=null){
-                  model.addAttribute("message","Expenses added successfully");
-              }else {
+              //if user not select unnecessary income source
+             if (! expensesService.isSelectedUnnecessarySource(expensesDto)){
+                 //save into database
+                 ExpensesDto expensesDto1 =  expensesService.save(expensesDto);
+                 if (expensesDto1 !=null){
+                     model.addAttribute("message","Expenses added successfully");
+                 }else {
 
-                  model.addAttribute("message","Unable to add expenses details");
-              }
+                     model.addAttribute("message","Unable to add expenses details");
+                 }
+             }else {
+                 model.addAttribute("message","you are selected unnecessary income source");
+             }
           }
           else {
-              model.addAttribute("message","Can not paid by this income source");
+              model.addAttribute("message","Insufficient income source");
           }
         }
         //go to the same page
-        model.addAttribute("incomeList",incomeService.findAll());
+        model.addAttribute("incomeList",incomeService.getAllIncomeListMoreThenZeroAmount());
         model.addAttribute("expensesDto",expensesDto);
         return "expenses/expensesaddpage";
     }

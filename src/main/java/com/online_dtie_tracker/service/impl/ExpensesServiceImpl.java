@@ -120,21 +120,54 @@ public class ExpensesServiceImpl implements ExpensesService {
 
 
     //check this expenses can paid by the selected list of income
-    public Boolean canPaidThatExpenses(ExpensesDto expensesDto){
+    public Boolean canPaidThatExpenses(ExpensesDto expensesDto) {
         //expenses amount
         Double amountToBePaid = expensesDto.getExpensesAmount();
 
         //total income amount
-        Double incomeAmount =0D;
+        Double incomeAmount = 0D;
         //calculate the total money of selected income lsit
-        for (Income income :expensesDto.getIncomeList()){
+        for (Income income : expensesDto.getIncomeList()) {
             //add income current amount
             incomeAmount += income.getAmount();
         }
-        if (amountToBePaid > incomeAmount){
+        if (amountToBePaid > incomeAmount) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
+
+    public Boolean isSelectedUnnecessarySource(ExpensesDto expensesDto){
+        Boolean isSelected = false;
+
+        //expenses amount
+        Double amountToBePaid = expensesDto.getExpensesAmount();
+        //total income amount
+        Double incomeAmount = 0D;
+        if (expensesDto.getIncomeList().size() > 1){
+            Integer index = 0;
+            for (Integer i =0;i<expensesDto.getIncomeList().size();i++) {
+                incomeAmount += expensesDto.getIncomeList().get(i).getAmount();
+
+                /*
+                if user select multiple income source but
+                 that expenses can be paid firs income source
+                 // if 2 income list
+                      expenes > incomeOne && expneses <incomeOne+incomeTwo
+                 */
+              if (i+1 !=expensesDto.getIncomeList().size()){
+                  if (!(amountToBePaid > incomeAmount && amountToBePaid <
+                          (incomeAmount + expensesDto.getIncomeList().get(i+1).getAmount()))){
+
+                      isSelected = true;
+                  }
+
+                  }
+              }
+        }
+        return isSelected;
+    }
+
 }
+
