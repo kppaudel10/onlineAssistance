@@ -25,7 +25,7 @@ public class ToDo {
     @Column(nullable = false)
     private ToDoStatus toDoStatus;
 
-    @Column(nullable = false,updatable = false)
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date toDoDate;
 

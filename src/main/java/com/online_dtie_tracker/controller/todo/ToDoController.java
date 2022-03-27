@@ -82,6 +82,9 @@ public class ToDoController {
         UserTask.setTotalTask(toDoDtoList.size());
 
         model.addAttribute("chartData", toDoService.getChartData());
+
+        //add todo details
+        model.addAttribute("todo",toDoService.findAll());
         return "todo/piechart";
     }
 

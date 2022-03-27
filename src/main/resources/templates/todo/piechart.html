@@ -26,8 +26,8 @@
 
             // Set chart options
             var options = {'title':'OverAll task condition',
-                'width':500,
-                'height':400};
+                'width':400,
+                'height':300};
 
             // Instantiate and draw our chart, passing in some options.
             var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -37,7 +37,8 @@
     <style>
         .chart-display{
             margin-top: 50px;
-            margin-left: 10%;
+            margin-left: 45%;
+            margin-right: 20px;
             position: absolute;
         }
     </style>
@@ -50,11 +51,35 @@
     <div th:replace="fragment/fragment :: navbar " ></div>
     <div th:replace="fragment/fragment :: homecss " ></div>
     <div class="main">
-       <div class="chart-display">
-           <h2 style="color: #04AA6D">Your Current Task Condition</h2>
+       <span class="chart-display">
+           <h3 style="color: #04AA6D">Your Current Task Condition</h3>
            <br>
            <div id="chart_div"></div>
-       </div>
+       </span>
+        <span>
+             <h3 class="head_caption"><u><i>ToDo List</i></u></h3>
+<!--        <button>-->
+<!--            <a  th:href="@{/todo/add}">Add</a>-->
+<!--        </button>-->
+        <table id="members" style="margin-right: 32%">
+            <thead>
+            <tr>
+                <th>S.N</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="i,loop:  ${todo}">
+                <td th:text="${loop.count}"></td>
+                <td th:text="${i.title}"></td>
+                <td  th:text="${i.toDoStatus.name()}"></td>
+                <td  th:text="${i.toDoDate}"></td>
+            </tr>
+            </tbody>
+        </table>
+        </span>
     </div>
 </div>
 </body>
