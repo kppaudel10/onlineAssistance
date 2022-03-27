@@ -1,6 +1,7 @@
 package com.online_dtie_tracker.controller.income;
 
 import com.online_dtie_tracker.Dto.IncomeDto;
+import com.online_dtie_tracker.excelgenerate.income.IncomeDataExcelExport;
 import com.online_dtie_tracker.service.impl.ExpensesServiceImpl;
 import com.online_dtie_tracker.service.impl.FinancialInformation;
 import com.online_dtie_tracker.service.impl.IncomeServiceImpl;
@@ -8,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/income")
@@ -82,5 +85,20 @@ public class IncomeController {
         model.addAttribute("expensesList",expensesService.findAll());
 
         return "income/incomereport";
+    }
+
+    @GetMapping("/excel/export")
+    public ModelAndView exportIncomeDataIntoExcel(){
+        ModelAndView modelAndView = new ModelAndView();
+        //set view
+        modelAndView.setView(new IncomeDataExcelExport());
+
+        //read the data from database
+        List<IncomeDto> incomeDtoList = incomeService.findAll();
+
+        //send that list to excelImpl class
+        modelAndView.addObject("list",incomeDtoList);
+
+        return modelAndView;
     }
 }
