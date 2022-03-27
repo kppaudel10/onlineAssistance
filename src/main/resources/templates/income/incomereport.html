@@ -68,6 +68,14 @@
            border-radius: 5px;
            text-decoration: none;
        }
+       .expenses-excel{
+           padding: 5px;
+           width:auto;
+           background-color: red;
+           color: white;
+           border-radius: 5px;
+           text-decoration: none;
+       }
     </style>
 </head>
 <body>
@@ -87,11 +95,13 @@
             <div id="chart_div"></div>
             <h4 th:text="'Current Balance: Rs.'+${currentBalance}" style="color: #0d6ad7"></h4>
            <br>
-          <a th:href="@{/income/excel/export}" class="income-excel">Export Income data into Excel
+          <a th:href="@{/income/excel/export}"
+             class="income-excel">Export Income data into Excel
           </a>
            <br>
             <br>
-            <a th:href="@{/expenses/excel/export}" class="expenses-excel"></a>
+            <a th:href="@{/expenses/excel/export}"
+               class="expenses-excel">Export Expenses data into Excel</a>
         </span>
         <span>
         <table id="members" style="margin-right: 30%">
