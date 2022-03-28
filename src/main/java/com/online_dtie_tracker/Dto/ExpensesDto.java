@@ -5,6 +5,8 @@ import com.online_dtie_tracker.model.User;
 import lombok.*;
 
 import javax.persistence.Column;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -22,6 +24,7 @@ public class ExpensesDto {
     private String expensesSource;
 
     @NotNull(message = "must not be null.")
+    @Min(value =1,message = "Can not be negative value")
     private Double expensesAmount;
 
     @Column(updatable = false)
